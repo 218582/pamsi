@@ -67,6 +67,8 @@ public:
 	 */
 	virtual int size(void) = 0;
 	
+	virtual void qs(int,int) = 0;
+	
 	/*!
 	 *\brief Destruktor wirtualny interfejsu ILista
 	 */
@@ -168,6 +170,13 @@ public:
 	 */
 	virtual int size (void);
 	
+private:
+	void swap(int,int);
+	
+public:
+	virtual void qs(int,int);
+
+	
 	/*!
 	 *\brief Destruktor Listy
 	 */
@@ -229,6 +238,59 @@ template <class T>
 int Lista<T>::size(void) {
 	return tablica->nOE();
 }
+
+template <class T>
+void Lista<T>::swap(int positionOne, int positionTwo) {
+	T elementOne;
+	T elementTwo;
+	try {
+		elementOne = get(positionOne);
+		elementTwo = get(positionTwo);
+		remove(positionOne);
+		add(elementTwo,positionOne);
+		remove(positionTwo);
+		add(elementOne,positionTwo);
+	}	
+	catch (...) {
+		throw;
+	}
+}
+
+
+template <class T>
+void Lista<T>::qs(int indexFront, int indexBack) {
+  	if (indexBack == 0) {throw CriticalException();}
+	int i = indexFront;
+	int j = indexBack;
+	T pivot = get((i+j)/2);
+  	try{
+  		do {
+			while(get(i) < pivot) {
+				i=i+1;
+			}
+			while (get(j) > pivot) {
+				j=j-1;
+			}
+			if (i<=j) {
+				swap(i,j);
+				i=i+1;
+				j=j-1;
+			}
+		} while (i<=j);
+		if (indexFront < j) {
+			qs (indexFront, j);
+		}
+		if (indexBack > i) {
+			qs (i, indexBack);
+		}
+	}
+  	catch(...) {
+  		throw;
+  	}
+  }
+
+
+
 
 
 

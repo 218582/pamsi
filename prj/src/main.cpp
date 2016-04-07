@@ -11,45 +11,81 @@ using namespace std;
 // Poniżej znajduje się szablon wykorzystania obiektu stos i jego metod, oraz proponowana obsługa wyjątków.
 
 int main (void) {
+ILista<int> * lista = new Lista<int>;
+
+try {
+	lista->add(1);
+	lista->add(5);
+	lista->add(0);
+	lista->add(17);
+	lista->add(-11);
+	lista->add(238);
+	lista->add(4);
+	lista->add(3);
+	lista->add(-12);
+	lista->add(2);
+	lista->add(6);
+	lista->add(9);
+	for (int i=0; i<lista->size(); i++) {
+		cout << lista->get(i) << " ";
+	}
+	cout << endl;
+	lista->qs(0,lista->size()-1);
+	for (int i=0; i<lista->size(); i++) {
+		cout << lista->get(i) << " ";
+	}
+	cout << endl;
+}
+catch (CriticalException * except) {
+	cout << "Exception: " << except->getError() << endl;
+}
+catch (ContinueException * except) {
+	cout << "Exception: " << except->getError() << endl;
+}
+catch (...) {
+	cout << "Exception: Unknown!" << endl;
+}
+}
+
 //Szablon projektu
 	
-	//Tworzenie obiektów
-	IStos<int> * stos = new Stos<int>;
-	
-	//Działanie programu
-	try{
-		stos->push(4);
-		stos->push(3);
-		cout << "TOP: " << stos->pop() << endl; //Powinno być 3
-		cout << "TOP: " << stos->get() << endl; //Powinno być 4
-		stos->pop();
-		if (stos->isEmpty()) cout << "Stos pusty!" << endl; //wykona się
-		cout << "----------------" << endl;
-		stos->pop(); //Wyrzuci wyjątek
-	}
-	
-	//Obsługa wyjątków
-	catch (ContinueException &cex) {
-		std::cout << "Exception: " << cex.getError() << std::endl;
-		delete stos;
-		exit(-1);
-	}
-	catch (CriticalException & crit_ex) {
-		std::cout << "Critical: " << crit_ex.getError() << std::endl;
-		delete stos;
-		exit(-2);
-	}
-	catch (...) {
-		std::cerr << "Unexpected exception!" << std::endl;
-		delete stos;
-		exit(-3);
-	}
-	
-	//Usunięcie obiektów
-	delete stos;
-	
-	return 0;
-}
+//	//Tworzenie obiektów
+//	IStos<int> * stos = new Stos<int>;
+//	
+//	//Działanie programu
+//	try{
+//		stos->push(4);
+//		stos->push(3);
+//		cout << "TOP: " << stos->pop() << endl; //Powinno być 3
+//		cout << "TOP: " << stos->get() << endl; //Powinno być 4
+//		stos->pop();
+//		if (stos->isEmpty()) cout << "Stos pusty!" << endl; //wykona się
+//		cout << "----------------" << endl;
+//		stos->pop(); //Wyrzuci wyjątek
+//	}
+//	
+//	//Obsługa wyjątków
+//	catch (ContinueException &cex) {
+//		std::cout << "Exception: " << cex.getError() << std::endl;
+//		delete stos;
+//		exit(-1);
+//	}
+//	catch (CriticalException & crit_ex) {
+//		std::cout << "Critical: " << crit_ex.getError() << std::endl;
+//		delete stos;
+//		exit(-2);
+//	}
+//	catch (...) {
+//		std::cerr << "Unexpected exception!" << std::endl;
+//		delete stos;
+//		exit(-3);
+//	}
+//	
+//	//Usunięcie obiektów
+//	delete stos;
+//	
+//	return 0;
+//}
 
 
 
