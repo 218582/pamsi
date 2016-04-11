@@ -12,6 +12,8 @@
 #include "lista.hh"
 #include "stos.hh"
 #include "kolejka.hh"
+#include "asoc.hh"
+#include "hash.hh"
 
 /*! \mainpage 
  *

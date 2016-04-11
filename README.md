@@ -1,6 +1,16 @@
 # pamsi
 
 ####Projektowanie algorytmów i metody sztucznej inteligencji
+######Zajęcia 6
+
+Zadania:
+
+- [ ] Tablica asocjacyjna - implementacja przy użyciu tablicy z haszowaniem
+- [ ] Użycie operatora indeksowania do odczytu z tablicy, zapis do tablicy
+- [ ] Zajęcia - interfejsy
+- [ ] Funkcja skrótu - zalecane i niezalecane implementacje
+- [ ] Test: sprawdzenie czasu działania
+
 ######Zajęcia 5
 
 Użyteczne przykłady znajdują się w pierwszym rozdziale dokumentacji [./dox/latex/refman.pdf](https://github.com/218582/pamsi/blob/master/dox/latex/refman.pdf).
