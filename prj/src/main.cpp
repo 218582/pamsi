@@ -11,40 +11,21 @@ using namespace std;
 // Poniżej znajduje się szablon wykorzystania obiektu stos i jego metod, oraz proponowana obsługa wyjątków.
 
 int main (void) {
-ILista<int> * lista = new Lista<int>;
 
-try {
-	lista->add(1);
-	lista->add(5);
-	lista->add(0);
-	lista->add(17);
-	lista->add(-11);
-	lista->add(238);
-	lista->add(4);
-	lista->add(3);
-	lista->add(-12);
-	lista->add(2);
-	lista->add(6);
-	lista->add(9);
-	for (int i=0; i<lista->size(); i++) {
-		cout << lista->get(i) << " ";
+	IHash<entry<int>> * hash = new Hash<entry<int>> (3);
+	entry<int> ent("ciastko", 234);
+	try {
+		hash->add(0,ent);
 	}
-	cout << endl;
-	lista->qs(0,lista->size()-1);
-	for (int i=0; i<lista->size(); i++) {
-		cout << lista->get(i) << " ";
+	catch (CriticalException * except) {
+		cout << "Exception: " << except->getError() << endl;
 	}
-	cout << endl;
-}
-catch (CriticalException * except) {
-	cout << "Exception: " << except->getError() << endl;
-}
-catch (ContinueException * except) {
-	cout << "Exception: " << except->getError() << endl;
-}
-catch (...) {
-	cout << "Exception: Unknown!" << endl;
-}
+	catch (ContinueException * except) {
+		cout << "Exception: " << except->getError() << endl;
+	}
+	catch (...) {
+		cout << "Exception: Unknown!" << endl;
+	}
 }
 
 //Szablon projektu
