@@ -12,8 +12,29 @@ using namespace std;
 
 int main (void) { 
 
+
 	try {
-		cout << "Nothing to do!" << endl;
+	
+		IBucket<string,int> * kosz = new Bucket<string,int>(0);
+		entry<string,int> wpis("Nowak",48);
+		kosz->add(wpis);
+		entry<string,int> wpis1("Kowalska",62);
+		kosz->add(wpis1);
+		entry<string,int> wpis2("Kowalski",2265);
+		kosz->add(wpis2);
+		entry<string,int> wpis3("Torun",200);
+		kosz->add(wpis3);
+		entry<string,int> wpis4("Walbrzych",1111);
+		kosz->add(wpis4);
+		entry<string,int> wpis5("Bombsite",7358);
+		kosz->add(wpis5);
+		entry<string,int> wpis6("Ciastko",413);
+		kosz->add(wpis6);
+		string user_input;
+		cin >>user_input;
+		cout << kosz->lookup(user_input) << endl;
+		
+		//cout << "Nothing to do!" << endl;
 	}
 	catch (CriticalException * except) {
 		cout << "Exception: " << except->getError() << endl;

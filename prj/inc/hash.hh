@@ -16,6 +16,9 @@ private:
 	T2 value;
 public:
 	
+	entry () {
+	}
+	
 	entry(T entryKey, T2 entryData) {
 		key = entryKey;
 		value = entryData;
@@ -30,6 +33,12 @@ public:
 	
 	T getKey (void) {
 		return key;
+	}
+	
+	entry<T,T2> & operator = (const entry<T,T2> & read) {
+		key=read.key;
+		value=read.value;
+		return * this;
 	}
 	
 	friend bool operator < (entry<T,T2> one, entry<T,T2> two) {
@@ -65,7 +74,7 @@ class IBucket : public entry<T,T2>{
 public:
 	virtual void add(entry<T,T2>) = 0;
 	virtual T2 remove(T) = 0;
-	virtual void reassign(entry<T,T2>) = 0;
+//	virtual void reassign(entry<T,T2>) = 0;
 	virtual T2 lookup(T) = 0;
 	virtual ~IBucket () {}	
 };
@@ -76,12 +85,40 @@ private:
 	Itabn<entry<T,T2>> * tablica;
 	int bucketID;
 public:
+	Bucket (): tablica (new tabn<entry<T,T2>>) {
+		bucketID = 0;
+	}
+	
 	Bucket (int ID) : tablica (new tabn<entry<T,T2>>) {
 		bucketID = ID;
 	}
+	
 	virtual void add(entry<T,T2> Ent) {
 		tablica->add(Ent);
 	}
+	
+	virtual T2 remove(T position) {
+		T2 temporary;
+		for (int i=0; i<tablica->nOE(); i++) {
+			if (tablica->show(i).getKey() == position) {
+				temporary = tablica->show(i).getVal();
+				tablica->remove(i);
+			}
+		}
+		throw CriticalException("ElementToDeleteFromBucketNotFound");
+		return temporary;
+	}
+	
+	virtual T2 lookup (T position) {
+		for (int i=0; i<tablica->nOE(); i++) {
+			if (tablica->show(i).getKey() == position) {
+				return tablica->show(i).getVal();
+			}
+		}
+		throw CriticalException("ElementToDeleteFromBucketNotFound");
+		return tablica->show(0).getVal();
+	}
+	
 	
 //	virtual void add(int bucket, T ent) {
 //		if (bucket<=numberOfBuckets) {
