@@ -1,7 +1,15 @@
 # pamsi
 
 ####Projektowanie algorytmów i metody sztucznej inteligencji
-######Zajęcia 6
+
+#####Rozwiązania zadań
+######Zajęcia 6 - 11 kwietnia
+
+Praca na zajęciach: [755789e](https://github.com/218582/pamsi/tree/755789eb76347fee9931ae41cedcbd422b3c7b09)
+
+Kod: w toku...
+
+Sprawozdanie: w toku...
 
 Zadania:
 
@@ -11,11 +19,23 @@ Zadania:
 - [ ] Funkcja skrótu - zalecane i niezalecane implementacje
 - [ ] Test: sprawdzenie czasu działania
 
-######Zajęcia 5
+######Zajęcia 5 - 4 kwietnia
 
+Praca na zajęciach [151a7be](https://github.com/218582/pamsi-sort/tree/151a7be5851034b2f27420e5fd56ab11a39c828e)
+
+Kod: w repozytorium [pamsi-sort](https://github.com/218582/pamsi-sort/tree/master/l3/z1)
+
+Sprawozdanie: [sprawozdanie_qs_ms.pdf](https://github.com/218582/pamsi-sort/blob/master/l3/spr_218582/sprawozdanie_qs_ms.pdf)
+
+
+Zajęcia:
 Użyteczne przykłady znajdują się w pierwszym rozdziale dokumentacji [./dox/latex/refman.pdf](https://github.com/218582/pamsi/blob/master/dox/latex/refman.pdf).
 
-######Zajęcia 4
+######Zajęcia 4 - 21 marca
+
+Praca na zajęciach: [283a287](https://github.com/218582/pamsi/tree/283a2874c30e131a04448d6b3471b5f5d51364f3)
+
+Kod: [a1dc84b](https://github.com/218582/pamsi/tree/a1dc84bd8d64141648a60344b6c3d324d3137748)
 
 Zadania:
 
@@ -25,7 +45,13 @@ Zadania:
 - [x] Umożliwienie obsługi automatycznej zadań w main() w pętli
 - [x] Usunięcie klasy Starter
 
-######Zajęcia 3
+######Zajęcia 3 - 14 marca
+
+Praca na zajęciach: [11d1a5b](https://github.com/218582/pamsi/tree/11d1a5b32575c64427704daf7a2b7af815db6ead)
+
+Sprawozdanie: [przeszukiwanie.pdf](https://github.com/218582/pamsi/blob/9247bbf97825edbbbc45d70be92a37366a047d60/prj/przeszukiwanie.pdf)
+
+Kod: [9247bbf](https://github.com/218582/pamsi/tree/9247bbf97825edbbbc45d70be92a37366a047d60)
 
 Zadania:
 
@@ -35,7 +61,13 @@ Zadania:
 - [x] Następne zajęcia - algorytmy sortowania.
 
 
-######Zajęcia 2
+######Zajęcia 2 - 7 marca
+
+Praca na zajęciach: [cb3e012](https://github.com/218582/pamsi/tree/cb3e01287b6f389f9574d3b324464c0e8ea931ff)
+
+Sprawozdanie: [lab001_10.pdf](https://github.com/218582/pamsi/blob/14972637384d68edfc3e0551d6eb7a15dbd45517/001_lab/lab001_10.pdf)
+
+Kod: [1497263](https://github.com/218582/pamsi/tree/14972637384d68edfc3e0551d6eb7a15dbd45517)
 
 Zadania:
 
@@ -44,7 +76,13 @@ Zadania:
 - [x] Przygotowanie: ADT, lista, kolejka, stos.
 
 
-######Zajęcia 1
+######Zajęcia 1 - 29 lutego
+
+Praca na zajęciach: [be6629a](https://github.com/218582/pamsi/tree/be6629ab48baa6bfdd5d85fb928ad48d187e6542)
+
+Sprawozdanie: [lab001.pdf](https://github.com/218582/pamsi/blob/c23fe076a75c67dd5c829637daf7ce31ee1b3ed0/001_lab/lab001.pdf)
+
+Kod: [c23fe07](https://github.com/218582/pamsi/tree/c23fe076a75c67dd5c829637daf7ce31ee1b3ed0)
 
 Zadania:
 
@@ -55,5 +93,3 @@ Zadania:
 Program w punkcie 2. powinien mieć dokładność na poziomie 1ms. Wykorzystać inne strategie powiększania tablicy.
 
 
-
-Zauważyłem znaczny wzrost zainteresowania tym repo w niedzielę 6 marca. Ciekawe dlaczego... Pozdrawiam! 

@@ -10,12 +10,10 @@ using namespace std;
 // W rozdziale 1. dokumentacji (../../dox/latex/refman.pdf) znajdują się użyteczne przykłady.
 // Poniżej znajduje się szablon wykorzystania obiektu stos i jego metod, oraz proponowana obsługa wyjątków.
 
-int main (void) {
+int main (void) { 
 
-	IHash<entry<int>> * hash = new Hash<entry<int>> (3);
-	entry<int> ent("ciastko", 234);
 	try {
-		hash->add(0,ent);
+		cout << "Nothing to do!" << endl;
 	}
 	catch (CriticalException * except) {
 		cout << "Exception: " << except->getError() << endl;
