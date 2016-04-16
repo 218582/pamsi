@@ -7,14 +7,13 @@
 using namespace std;
 #include "../inc/main.hh"
 
-// W rozdziale 1. dokumentacji (../../dox/latex/refman.pdf) znajdują się użyteczne przykłady.
-// Poniżej znajduje się szablon wykorzystania obiektu stos i jego metod, oraz proponowana obsługa wyjątków.
 
 int main (void) { 
 
 
+//Przykład obsługi samego bucketa
+
 	try {
-	
 		IBucket<string,int> * kosz = new Bucket<string,int>(0);
 		entry<string,int> wpis("Nowak",48);
 		kosz->add(wpis);
@@ -33,22 +32,23 @@ int main (void) {
 		string user_input;
 		cin >>user_input;
 		cout << kosz->lookup(user_input) << endl;
-		
-		//cout << "Nothing to do!" << endl;
 	}
-	catch (CriticalException * except) {
-		cout << "Exception: " << except->getError() << endl;
+	catch (CriticalException & except) {
+		cout << "Exception: " << except << endl;
 	}
-	catch (ContinueException * except) {
-		cout << "Exception: " << except->getError() << endl;
+	catch (ContinueException & except) {
+		cout << "Exception: " << except << endl;
+	}
+	catch (ExceptionBase & base) {
+		cout << "Exception" << base << endl;
 	}
 	catch (...) {
-		cout << "Exception: Unknown!" << endl;
+		cout << "Totally unknown!" << endl;
 	}
 }
 
-//Szablon projektu
-	
+////Szablon projektu
+//	
 //	//Tworzenie obiektów
 //	IStos<int> * stos = new Stos<int>;
 //	
@@ -66,12 +66,12 @@ int main (void) {
 //	
 //	//Obsługa wyjątków
 //	catch (ContinueException &cex) {
-//		std::cout << "Exception: " << cex.getError() << std::endl;
+//		std::cout << "Exception: " << cex << std::endl;
 //		delete stos;
 //		exit(-1);
 //	}
 //	catch (CriticalException & crit_ex) {
-//		std::cout << "Critical: " << crit_ex.getError() << std::endl;
+//		std::cout << "Critical: " << crit_ex << std::endl;
 //		delete stos;
 //		exit(-2);
 //	}

@@ -65,6 +65,20 @@ public:
 		output << to.key << " " << to.value;
 		return output;
 	}
+	
+	friend std::istream & operator >> (std::istream & input, const entry<T,T2> & to) {
+		if(input.eof()) {
+			input.setstate(std::ios::eofbit);
+		}
+		else {
+			T temp;
+			T2 temp2;
+			input >> temp >> temp2;
+			to.key = temp;
+			to.value = temp2;
+		}
+		return input;
+	}
 };
 
 
@@ -94,29 +108,43 @@ public:
 	}
 	
 	virtual void add(entry<T,T2> Ent) {
-		tablica->add(Ent);
+		try {
+			tablica->add(Ent);
+		}
+		catch (...) {
+			throw;
+		}
 	}
 	
 	virtual T2 remove(T position) {
 		T2 temporary;
-		for (int i=0; i<tablica->nOE(); i++) {
-			if (tablica->show(i).getKey() == position) {
-				temporary = tablica->show(i).getVal();
-				tablica->remove(i);
+		try {
+			for (int i=0; i<tablica->nOE(); i++) {
+				if (tablica->show(i).getKey() == position) {
+					temporary = tablica->show(i).getVal();
+					tablica->remove(i);
+					return temporary;
+				}
 			}
+			throw CriticalException("ElementToDeleteFromBucketNotFound");
 		}
-		throw CriticalException("ElementToDeleteFromBucketNotFound");
-		return temporary;
+		catch (...) {
+			throw;
+		}
 	}
 	
 	virtual T2 lookup (T position) {
-		for (int i=0; i<tablica->nOE(); i++) {
-			if (tablica->show(i).getKey() == position) {
-				return tablica->show(i).getVal();
+		try {
+			for (int i=0; i<tablica->nOE(); i++) {
+				if (tablica->show(i).getKey() == position) {
+					return tablica->show(i).getVal();
+				}
 			}
+			throw CriticalException("ElementNotFound");
 		}
-		throw CriticalException("ElementToDeleteFromBucketNotFound");
-		return tablica->show(0).getVal();
+		catch (...) {
+			throw;
+		}
 	}
 	
 	
