@@ -50,7 +50,7 @@ public:
 	/*!
 	 *\brief Zwraca żadany element, o ile istnieje
 	 */
-	virtual T show (int) = 0;
+	virtual T show (int) const = 0;
 	 
 	/*!
 	 *\brief Wyświetla elementy tablicy
@@ -87,6 +87,16 @@ public:
 	 *\warning Wymaga typu danych ze zdefiniowanym operatorem porównania "większe od"
 	 */
 	 virtual void bubblesort() = 0;
+	 
+	 //Jest OK
+	 friend std::ostream & operator << (std::ostream & output, /*const - BEZ TEGO DZIAŁA*/  Itabn<T> * to) {
+		for (int i=0; i<(to->nOE());i++) {
+			output << to->show(i) << '\n';
+		}
+		return output;
+	}
+	
+	 
 };
 
 
@@ -216,7 +226,7 @@ public:
 	 *
 	 *\exception CriticalException WrongIndexException przy próbie odczytania z pustej tablicy lub dostępu do nieistniejącego elementu.
 	 */
-	 virtual T show (int);
+	 virtual T show (int) const;
 
 	/*!
 	 * \brief Wyświetla listę elementów
@@ -257,6 +267,14 @@ public:
 	 */
 	virtual T operator [] (int) const;
 	
+//	friend T& operator [] (int index) {
+//		return tab[index];
+//	}
+//	
+//	friend T operator [] (int index) {
+//		return tab[index];
+//	}
+	
 private:
 	/*!
 	 *\brief Zamienia dwa elementy miejscami
@@ -274,6 +292,13 @@ public:
 	 *\exception CriticalException re-throw z tabn<T>::swap(int,int)
 	 */
 	 virtual void bubblesort(void);
+	 
+//	 friend std::ostream & operator << (std::ostream & output, tabn<T> & to) {
+//		for (int i=0; i<to.nOE();i++) {
+//			output << to.show(i);
+//		}
+//		return output;
+//	}
 };
 
 
@@ -439,7 +464,7 @@ T tabn<T>::operator [] (int index) const {
 }
 
 template <class T>
-T tabn<T>::show(int position) {
+T tabn<T>::show(int position) const {
 	if (position>=numberOfElems || position<0) {
 		throw CriticalException("WrongIndexException");
 	}

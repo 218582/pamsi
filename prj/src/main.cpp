@@ -11,6 +11,8 @@ using namespace std;
 int main (void) { 
 
 
+
+
 //Przykład obsługi samego bucketa
 
 	try {
@@ -23,15 +25,19 @@ int main (void) {
 		kosz->add(wpis2);
 		entry<string,int> wpis3("Torun",200);
 		kosz->add(wpis3);
+		entry<string,int> wpis8("Torun",201);
+		kosz->add(wpis8);
 		entry<string,int> wpis4("Walbrzych",1111);
 		kosz->add(wpis4);
 		entry<string,int> wpis5("Bombsite",7358);
 		kosz->add(wpis5);
 		entry<string,int> wpis6("Ciastko",413);
 		kosz->add(wpis6);
+		kosz->remove("Nowak");
 		string user_input;
 		cin >>user_input;
-		cout << kosz->lookup(user_input) << endl;
+		cout << kosz->lookupWhole(user_input);
+		//kosz->printAllElements();
 	}
 	catch (CriticalException & except) {
 		cout << "Exception: " << except << endl;

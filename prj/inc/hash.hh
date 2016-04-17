@@ -90,21 +90,41 @@ public:
 	virtual T2 remove(T) = 0;
 //	virtual void reassign(entry<T,T2>) = 0;
 	virtual T2 lookup(T) = 0;
+	virtual Itabn<T2> * lookupWhole (T)=0;
 	virtual ~IBucket () {}	
+	virtual void printAllElements() = 0;
 };
+
+
+
+
+
 
 template <class T, class T2>
 class Bucket : public IBucket<T,T2>{
 private:
 	Itabn<entry<T,T2>> * tablica;
+
 	int bucketID;
 public:
-	Bucket (): tablica (new tabn<entry<T,T2>>) {
+
+	Itabn<T2> * temp;
+	
+	Bucket (): tablica (new tabn<entry<T,T2>>), temp (new tabn<T2>) {
 		bucketID = 0;
 	}
 	
-	Bucket (int ID) : tablica (new tabn<entry<T,T2>>) {
+	Bucket (int ID) : tablica (new tabn<entry<T,T2>>), temp (new tabn<T2>) {
 		bucketID = ID;
+	}
+	
+	~Bucket () {
+		delete tablica;
+		delete temp;
+	}
+	
+	virtual void printAllElements() {
+		temp->showElems();
 	}
 	
 	virtual void add(entry<T,T2> Ent) {
@@ -133,6 +153,9 @@ public:
 		}
 	}
 	
+	
+	//Jak wyświetlać wszystkie elementy o danym kluczu?
+	//Przeszukiwać całą tablicę, czy zmienić sposób zapisywania danych pod kluczem?
 	virtual T2 lookup (T position) {
 		try {
 			for (int i=0; i<tablica->nOE(); i++) {
@@ -140,25 +163,39 @@ public:
 					return tablica->show(i).getVal();
 				}
 			}
-			throw CriticalException("ElementNotFound");
+			throw ContinueException("ElementNotFound");
 		}
 		catch (...) {
 			throw;
 		}
 	}
 	
+	virtual Itabn<T2> * lookupWhole (T position){		
+		try {
+			if (temp->nOE()!=0) {
+				for (int i=0; i<((temp->nOE())-1);i++) {
+					temp->remove();
+				}
+			}
+			for (int i=0; i<tablica->nOE(); i++) {
+				if (tablica->show(i).getKey() == position) {
+					//std::cout << tablica->show(i).getVal() << std::endl;
+					temp->add(tablica->show(i).getVal());
+				}
+			}
+			if (temp->nOE()==0) {
+				throw ContinueException("ElementNotFound");
+			}
+		}
+		catch (...) {
+			throw;
+		}
+		return temp;
+	}
 	
-//	virtual void add(int bucket, T ent) {
-//		if (bucket<=numberOfBuckets) {
-//			tablica->add(ent,bucket);
-//		}
-//		else throw ContinueException("Bucket number wrong!");
-//	}
-
+	
+	 
 	
 	
-	
-	
-
 };
 #endif
