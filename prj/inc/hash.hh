@@ -62,7 +62,7 @@ public:
 	}
 	
 	friend std::ostream & operator << (std::ostream & output, const entry<T,T2> & to) {
-		output << to.key << " " << to.value;
+		output <<  '\t' << to.key << " : " << to.value;
 		return output;
 	}
 	
@@ -93,6 +93,8 @@ public:
 	virtual Itabn<T2> * lookupWhole (T)=0;
 	virtual ~IBucket () {}	
 	virtual void printAllElements() = 0;
+	virtual int getID(void) = 0;
+	virtual void printFoundElements(void) = 0;
 };
 
 
@@ -111,7 +113,7 @@ public:
 	Itabn<T2> * temp;
 	
 	Bucket (): tablica (new tabn<entry<T,T2>>), temp (new tabn<T2>) {
-		bucketID = 0;
+		bucketID = 99;
 	}
 	
 	Bucket (int ID) : tablica (new tabn<entry<T,T2>>), temp (new tabn<T2>) {
@@ -119,11 +121,19 @@ public:
 	}
 	
 	~Bucket () {
-		delete tablica;
-		delete temp;
+		//delete [] tablica;
+		//delete temp;
+	}
+	
+	virtual int getID(void) {
+		return bucketID;
 	}
 	
 	virtual void printAllElements() {
+		tablica->showElems();
+	}
+	
+	virtual void printFoundElements(void) {
 		temp->showElems();
 	}
 	
@@ -146,7 +156,7 @@ public:
 					return temporary;
 				}
 			}
-			throw CriticalException("ElementToDeleteFromBucketNotFound");
+			throw CriticalException("ElementToRemoveFromBucketNotFound");
 		}
 		catch (...) {
 			throw;
@@ -154,8 +164,6 @@ public:
 	}
 	
 	
-	//Jak wyświetlać wszystkie elementy o danym kluczu?
-	//Przeszukiwać całą tablicę, czy zmienić sposób zapisywania danych pod kluczem?
 	virtual T2 lookup (T position) {
 		try {
 			for (int i=0; i<tablica->nOE(); i++) {

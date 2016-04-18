@@ -256,7 +256,10 @@ public:
 	 *\param index - numer elementu tablicy
 	 *\retval T* Wskaźnik na wybrany element tablicy
 	 */
-	virtual T& operator [] (int);
+	virtual T& operator [] (int index) {
+		return tab[index];
+	}
+
 	
 	/*!
 	 *\brief Umożliwia odczyt dowolnego elementu tablicy bez
@@ -265,15 +268,11 @@ public:
 	 *\param index - numer elementu tablicy
 	 *\retval T Element tablicy
 	 */
-	virtual T operator [] (int) const;
+	virtual T operator [] (int index) const {
+		return tab[index];
+	} 
 	
-//	friend T& operator [] (int index) {
-//		return tab[index];
-//	}
-//	
-//	friend T operator [] (int index) {
-//		return tab[index];
-//	}
+
 	
 private:
 	/*!
@@ -454,16 +453,6 @@ void tabn<T>::isEmptyException (void) {
 }
 
 template <class T>
-T& tabn<T>::operator [] (int index) {
-	return tab[index];
-}
-
-template <class T>
-T tabn<T>::operator [] (int index) const {
-	return tab[index];
-}
-
-template <class T>
 T tabn<T>::show(int position) const {
 	if (position>=numberOfElems || position<0) {
 		throw CriticalException("WrongIndexException");
@@ -476,7 +465,7 @@ T tabn<T>::show(int position) const {
 template <class T>
 void tabn<T>::showElems (void) {
 		for (int i=0; i<numberOfElems; i++) {
-			std::cout << tab[i] << " ";
+			std::cout << tab[i] << '\n';
 		}
 		std::cout << std::endl;
 	}
