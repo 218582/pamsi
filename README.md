@@ -3,6 +3,23 @@
 ####Projektowanie algorytmów i metody sztucznej inteligencji
 
 #####Rozwiązania zadań
+######Zajęcia 7 - 18 kwietnia
+
+Praca na zajęciach: w toku...
+
+Kod: w toku...
+
+Sprawozdanie: w toku...
+
+Zadania
+
+- [ ] Interfejs drzewa
+- [ ] Drzewo, rebalansowanie (w tablicy)
+- [ ] Zmierzyć czas odczytu z drzewa (sprawozdanie)
+
+
+
+
 ######Zajęcia 6 - 11 kwietnia
 
 Praca na zajęciach: [755789e](https://github.com/218582/pamsi/tree/755789eb76347fee9931ae41cedcbd422b3c7b09)
@@ -13,11 +30,11 @@ Sprawozdanie: [tablica_asocjacyjna.pdf](https://github.com/218582/pamsi/blob/26d
 
 Zadania:
 
-- [ ] Tablica asocjacyjna - implementacja przy użyciu tablicy z haszowaniem
-- [ ] Użycie operatora indeksowania do odczytu z tablicy, zapis do tablicy
-- [ ] Zajęcia - interfejsy
-- [ ] Funkcja skrótu - zalecane i niezalecane implementacje
-- [ ] Test: sprawdzenie czasu działania
+- [x] Tablica asocjacyjna - implementacja przy użyciu tablicy z haszowaniem
+- [x] Użycie operatora indeksowania do odczytu z tablicy, zapis do tablicy
+- [x] Zajęcia - interfejsy
+- [x] Funkcja skrótu - zalecane i niezalecane implementacje
+- [x] Test: sprawdzenie czasu działania
 
 ######Zajęcia 5 - 4 kwietnia
 

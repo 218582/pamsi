@@ -2,10 +2,10 @@ G = g++
 GFLAGS = -Wall -pedantic -g -std=c++11 -Iinc
 ALLFILES = obj/tabl.o obj/run.o src/main.cpp inc/tabl.hh inc/main.hh inc/run.hh inc/stoper.hh \
 	obj/stoper.o inc/except.hh obj/except.o inc/lista.hh obj/lista.o inc/stos.hh obj/stos.o \
-	inc/kolejka.hh obj/kolejka.o inc/hash.hh obj/hash.o inc/asoc.hh obj/asoc.o
+	inc/kolejka.hh obj/kolejka.o inc/hash.hh obj/hash.o inc/asoc.hh obj/asoc.o inc/tree.hh obj/tree.o
 
 tabl: obj $(ALLFILES)
-	$(G) $(GFLAGS) ./obj/tabl.o ./obj/run.o ./obj/stoper.o ./obj/except.o obj/lista.o obj/stos.o obj/kolejka.o obj/hash.o obj/asoc.o ./src/main.cpp -o tabl
+	$(G) $(GFLAGS) ./obj/tabl.o ./obj/run.o ./obj/stoper.o ./obj/except.o obj/lista.o obj/stos.o obj/kolejka.o obj/hash.o obj/asoc.o obj/tree.o ./src/main.cpp -o tabl
 
 obj:
 	mkdir obj
@@ -31,11 +31,14 @@ obj/stos.o: src/stos.cpp inc/stos.hh inc/tabl.hh inc/except.hh
 obj/kolejka.o: src/kolejka.cpp inc/kolejka.hh inc/tabl.hh inc/except.hh
 	$(G) $(GFLAGS) -c ./src/kolejka.cpp -o ./obj/kolejka.o
 	
-obj/hash.o: src/hash.cpp inc/hash.hh
+obj/hash.o: src/hash.cpp inc/hash.hh inc/tabl.hh inc/except.hh
 	$(G) $(GFLAGS) -c ./src/hash.cpp -o ./obj/hash.o
 	
-obj/asoc.o: src/asoc.cpp inc/asoc.hh
+obj/asoc.o: src/asoc.cpp inc/asoc.hh inc/hash.hh inc/tabl.hh inc/except.hh
 	$(G) $(GFLAGS) -c ./src/asoc.cpp -o ./obj/asoc.o
+	
+obj/tree.o: src/tree.cpp inc/tree.hh inc/tabl.hh inc/except.hh
+	$(G) $(GFLAGS) -c ./src/tree.cpp -o ./obj/tree.o
 
 	
 clean:
