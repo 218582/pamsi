@@ -13,10 +13,10 @@ Sprawozdanie: w toku...
 
 Zadania
 
-- [ ] Interfejs drzewa
-- [ ] Drzewo, rebalansowanie (w tablicy)
-- [ ] Zmierzyć czas odczytu z drzewa (sprawozdanie)
-
+- [x] Interfejs drzewa (wstępny)
+- [ ] Drzewo, rebalansowanie (w tablicy / node'y) - "drzewa czerwono-czarne"
+- [ ] Zmierzyć czas odczytu z drzewa po wypełnieniu rozmiarami (sprawozdanie)
+- [ ] Następne zajęcia - grafy
 
 
 

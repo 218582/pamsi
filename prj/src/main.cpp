@@ -11,66 +11,69 @@ using namespace std;
 
 
 int main (void) { 
+	ITree<int> * tree = new Tree<int>; 
 	
 	
-	int liczbaElementow[] = {10, 100, 1000, 10000, 100000, 1000000};
-	double timeW = 0;
-	double timeS = 0;
-	
-	
-	
-	ofstream WynikiWrite;
-	WynikiWrite.open("WynikiWrite",std::ios::app);
-	if(!WynikiWrite.is_open()){
-    	cerr << "Nie otwarty plik!"<< endl;
-   	 return 1;
-	}
-	
-	ofstream WynikiSearch;
-	WynikiSearch.open("WynikiSearch",std::ios::app);
-	if(!WynikiSearch.is_open()){
-    	cerr << "Nie otwarty plik!"<< endl;
-   	 return 1;
-	}
-	
-	try {
-		WynikiWrite << "#Zapisywanie" << endl;
-		WynikiSearch << "#Wyszukiwanie" << endl;
-		for (int i=0; i<6; i++) {
-			for(int j=0; j<10; j++) {
-				IStoper * stoper = new Stoper;
-				asoc_test test(liczbaElementow[i]);
-				stoper->start();
-				test.prepare(liczbaElementow[i]);
-				stoper->stop();
-				timeW = timeW+(stoper->getElapsedTimeMs());
-				stoper->start();
-				test.run();
-				stoper->stop();
-				timeS = timeS+(stoper->getElapsedTimeMs());
-			}
-			timeW = timeW / 10;
-			timeS = timeS / 10;
-			WynikiWrite << liczbaElementow[i] << " " << timeW << endl;
-			WynikiSearch << liczbaElementow[i] << " " << timeS << endl;
-			timeW = 0;
-			timeS = 0;
-			cout << "Test dla " << liczbaElementow[i] << " zakonczony." << endl;
-		}
-	}
-	catch (CriticalException & except) {
-		cout << "Critical Exception: " << except << endl;
-	}
-	catch (ContinueException & except) {
-		cout << "Exception: " << except << endl;
-	}
-	catch (ExceptionBase & base) {
-		cout << "Exception" << base << endl;
-	}
-	catch (...) {
-		cout << "Totally unknown!" << endl;
-	}
 }
+	
+//	int liczbaElementow[] = {10, 100, 1000, 10000, 100000, 1000000};
+//	double timeW = 0;
+//	double timeS = 0;
+//	
+//	
+//	
+//	ofstream WynikiWrite;
+//	WynikiWrite.open("WynikiWrite",std::ios::app);
+//	if(!WynikiWrite.is_open()){
+//    	cerr << "Nie otwarty plik!"<< endl;
+//   	 return 1;
+//	}
+//	
+//	ofstream WynikiSearch;
+//	WynikiSearch.open("WynikiSearch",std::ios::app);
+//	if(!WynikiSearch.is_open()){
+//    	cerr << "Nie otwarty plik!"<< endl;
+//   	 return 1;
+//	}
+//	
+//	try {
+//		WynikiWrite << "#Zapisywanie" << endl;
+//		WynikiSearch << "#Wyszukiwanie" << endl;
+//		for (int i=0; i<6; i++) {
+//			for(int j=0; j<10; j++) {
+//				IStoper * stoper = new Stoper;
+//				asoc_test test(liczbaElementow[i]);
+//				stoper->start();
+//				test.prepare(liczbaElementow[i]);
+//				stoper->stop();
+//				timeW = timeW+(stoper->getElapsedTimeMs());
+//				stoper->start();
+//				test.run();
+//				stoper->stop();
+//				timeS = timeS+(stoper->getElapsedTimeMs());
+//			}
+//			timeW = timeW / 10;
+//			timeS = timeS / 10;
+//			WynikiWrite << liczbaElementow[i] << " " << timeW << endl;
+//			WynikiSearch << liczbaElementow[i] << " " << timeS << endl;
+//			timeW = 0;
+//			timeS = 0;
+//			cout << "Test dla " << liczbaElementow[i] << " zakonczony." << endl;
+//		}
+//	}
+//	catch (CriticalException & except) {
+//		cout << "Critical Exception: " << except << endl;
+//	}
+//	catch (ContinueException & except) {
+//		cout << "Exception: " << except << endl;
+//	}
+//	catch (ExceptionBase & base) {
+//		cout << "Exception" << base << endl;
+//	}
+//	catch (...) {
+//		cout << "Totally unknown!" << endl;
+//	}
+//}
 	
 	
 	

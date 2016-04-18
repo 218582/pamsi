@@ -14,6 +14,7 @@
 #include "kolejka.hh"
 #include "asoc.hh"
 #include "hash.hh"
+#include "tree.hh"
 
 /*! \mainpage 
  *
