@@ -5,7 +5,7 @@
 #####Rozwiązania zadań
 ######Zajęcia 7 - 18 kwietnia
 
-Praca na zajęciach: w toku...
+Praca na zajęciach: [6773bce](https://github.com/218582/pamsi/tree/6773bce16d793091c32113be8915c2af218e95fe)
 
 Kod: w toku...
 
