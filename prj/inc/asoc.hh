@@ -93,7 +93,7 @@ public:
 		counter = 0;
 	}
 	asoc_test (int sizeOfTest){ 
-		t_asoc = new Asoc<std::string, int>((int)(sizeOfTest < 100 ? 3 : sizeOfTest/33));
+		t_asoc = new Asoc<std::string, int>((int)(sizeOfTest < 100 ? 10 : sizeOfTest < 10000 ? sizeOfTest/100 : sizeOfTest/1000));
 		counter = sizeOfTest;
 	}
 	
@@ -115,7 +115,7 @@ public:
 			while (plik >> keydb >> datadb && i<counter) {
 				t_asoc->add(keydb,datadb);
 				i+=1;
-				if (i==counter-1) {
+				if (i==counter-(counter/2)) {
 					toFind = keydb;
 				}
 			}
