@@ -16,7 +16,7 @@ Zadania
 - [x] Interfejs drzewa (wstępny)
 - [ ] Drzewo, rebalansowanie (w tablicy / node'y) - "drzewa czerwono-czarne"
 - [ ] Zmierzyć czas odczytu z drzewa po wypełnieniu rozmiarami (sprawozdanie)
-- [ ] Następne zajęcia - grafy
+- [x] Następne zajęcia - grafy
 
 
 
