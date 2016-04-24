@@ -11,7 +11,8 @@ using namespace std;
 
 
 int main (void) { 
-	ITree<int> * tree = new Tree<int>; 
+	ITreeRB<int> * tree = new TreeRB<int>; 
+
 	
 	
 }
@@ -117,7 +118,7 @@ int main (void) {
 //	}
 //}
 
-////Przykład obsługi samego bucketa
+//Przykład obsługi samego bucketa
 
 //	try {
 //		IBucket<string,int> * kosz = new Bucket<string,int>(0);
