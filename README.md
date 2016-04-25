@@ -3,6 +3,24 @@
 ####Projektowanie algorytmów i metody sztucznej inteligencji
 
 #####Rozwiązania zadań
+
+######Zajęcia 8 - 25 kwietnia
+
+Praca na zajęciach:
+
+Kod: w toku...
+
+Sprawozdanie: W toku...
+
+Zadania 
+
+- [ ] Zaimplementować graf
+- [ ] Uzasadnić wybrany sposób reprezentacji grafu
+- [ ] Zaimplementować DFS i BFS
+- [ ] Zbadać czas przeszukiwania DFS i BFS dla |V| = {10, 100, 1 000, 1 000 000}
+- [ ] Wyniki przedstawić w sprawozdaniu
+
+
 ######Zajęcia 7 - 18 kwietnia
 
 Praca na zajęciach: [6773bce](https://github.com/218582/pamsi/tree/6773bce16d793091c32113be8915c2af218e95fe)
