@@ -8,21 +8,9 @@ enum Colour {red, black};
 
 std::ostream & operator << (std::ostream &, Colour);
 	
-//Colour & operator ++(Colour & col) {
-//	switch (col) {
-//		case red: return col = black; break;
-//		case black: return col = red; break;
-//	}
-//	throw CriticalException("WrongOperatorPPColour");
-//	return col;
-//}
-
-//Colour operator++(Colour& col, int)
-//{
-//  Colour temp(col);
-//  ++col;
-//  return temp;
-//}
+	
+/* \brief Klasa definiująca obiekt typu node dla drzewa czerwono-czarnego
+*/
 
 template <class T>
 class nodeRB {
@@ -62,6 +50,46 @@ public:
 		return up;
 	}
 	
+	T getLeftKey (void) {
+		if (left != NULL)
+			return left->getKey();
+		else
+			return 0;
+	}
+	
+	T getRightKey (void) {
+		if (right != NULL)
+			return right->getKey();
+		else
+			return 0;	
+	}
+	
+	T getUpKey (void) {
+		if (up != NULL)
+			return up->getKey();
+		else
+			return 0;
+	}
+	
+	void setKey (T keyToSet) {
+		key = keyToSet;
+	}
+	
+	void setColour (Colour colourToSet) {
+		colour = colourToSet;
+	}
+	
+	void setLeft (nodeRB<T> * leftDescendant) {
+		left = leftDescendant;
+	}
+	
+	void setRight (nodeRB<T> * rightDescendant) {
+		right = rightDescendant;
+	}
+	
+	void setUp (nodeRB<T> * parent) {
+		up = parent;
+	}
 	
 	nodeRB<T> & operator = (const nodeRB<T> & read) {
 		key = read.key;

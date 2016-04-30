@@ -6,18 +6,39 @@
 #include <iostream>
 using namespace std;
 #include "../inc/main.hh"
-#include <numeric>
+//#include <numeric>
 
 
 
 int main (void) { 
 //	ITreeRB<int> * tree = new TreeRB<int>; 
-nodeRB<int> one (5);
-cout << "Key: " << one.getKey() << endl;
-cout << "Colour: " << one.getColour() << endl;
-cout << "Left: "<< one.getLeft() << endl;
-cout << "Right: " << one.getRight() << endl;
-cout << "Up: " << one.getUp() << endl;	
+	try {
+		nodeRB<int> one (5);
+		nodeRB<int> two (4);
+		nodeRB<int> three (3);
+		one.setColour(red);
+		two.setUp(&one);
+		one.setLeft(&two);
+		three.setUp(&one);
+		one.setRight(&three);
+		cout << "Key: " << one.getKey() << endl;
+		cout << "Colour: " << one.getColour() << endl;
+		cout << "Left: "<< one.getLeft() << " : " << one.getLeftKey() << endl;
+		cout << "Right: " << one.getRight() << " : " << one.getRightKey() << endl;
+		cout << "Up: " << one.getUp() << " : " << one.getUpKey() << endl;	
+	}
+	catch (CriticalException & except) {
+		cout << "Critical Exception: " << except << endl;
+	}
+	catch (ContinueException & except) {
+		cout << "Exception: " << except << endl;
+	}
+	catch (ExceptionBase & base) {
+		cout << "Exception" << base << endl;
+	}
+	catch (...) {
+		cout << "Totally unknown!" << endl;
+	}
 	
 }
 	
