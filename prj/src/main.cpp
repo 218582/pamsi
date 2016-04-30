@@ -11,9 +11,13 @@ using namespace std;
 
 
 int main (void) { 
-	ITreeRB<int> * tree = new TreeRB<int>; 
-
-	
+//	ITreeRB<int> * tree = new TreeRB<int>; 
+nodeRB<int> one (5);
+cout << "Key: " << one.getKey() << endl;
+cout << "Colour: " << one.getColour() << endl;
+cout << "Left: "<< one.getLeft() << endl;
+cout << "Right: " << one.getRight() << endl;
+cout << "Up: " << one.getUp() << endl;	
 	
 }
 	

@@ -6,6 +6,8 @@
 
 enum Colour {red, black};
 
+std::ostream & operator << (std::ostream &, Colour);
+	
 //Colour & operator ++(Colour & col) {
 //	switch (col) {
 //		case red: return col = black; break;
@@ -24,23 +26,42 @@ enum Colour {red, black};
 
 template <class T>
 class nodeRB {
-public:
+private:
 	T key;
 	Colour colour;
 	class nodeRB<T> * left;
 	class nodeRB<T> * right;
 	class nodeRB<T> * up;
-	
-	nodeRB (T elem) {
+
+public:
+	nodeRB (T addKey, nodeRB<T> * addUp = NULL, nodeRB<T> * addLeft = NULL, nodeRB<T> * addRight = NULL) {
+		key = addKey;
+		up = addUp;
+		left = addLeft;
+		right = addRight;
 		colour = black;
-		key = elem;
-		left = right = up = NULL;
 	}
 	
-	nodeRB (void) {
-		left = right = up = NULL;
-		colour = black;
-	}	
+	T getKey (void) {
+		return key;
+	}
+	
+	Colour getColour (void) {
+		return colour;
+	}
+	
+	nodeRB<T> * getLeft (void) {
+		return left;
+	}
+	
+	nodeRB<T> * getRight (void) {
+		return right;
+	}
+	
+	nodeRB<T> * getUp (void) {
+		return up;
+	}
+	
 	
 	nodeRB<T> & operator = (const nodeRB<T> & read) {
 		key = read.key;
@@ -94,79 +115,25 @@ class ITreeRB {
 private:
 	virtual void print(std::ostream &) = 0;
 public:
-	virtual nodeRB<T> * search    (nodeRB<T> *, T) = 0;
-	virtual nodeRB<T> * searchMin (nodeRB<T> *) = 0;
-	virtual nodeRB<T> * searchMax (nodeRB<T> *) = 0;
+//	virtual nodeRB<T> * search    (nodeRB<T> *, T) = 0;
+//	virtual nodeRB<T> * searchMin (nodeRB<T> *) = 0;
+//	virtual nodeRB<T> * searchMax (nodeRB<T> *) = 0;
 //	virtual void rightRot (nodeRB<T> *) = 0;
 //	virtual void leftRot  (nodeRB<T> *) = 0;
 //	virtual void restore (nodeRB<T> *) = 0;
 //	virtual void insert(nodeRB<T> *) = 0;
 //	virtual void remove(nodeRB<T> *) = 0;
 
-	friend std::ostream & operator << (std::ostream & output, ITreeRB * to) {
-		to->print(output);
-		return output;
-	}
+//	friend std::ostream & operator << (std::ostream & output, ITreeRB * to) {
+//		to->print(output);
+//		return output;
+//	}
 	
 };
 
 
 template <class T>
 class TreeRB : public ITreeRB<T> {
-private:
-	nodeRB<T> * root;
-	nodeRB<T> * current;
-	nodeRB<T> * sentinel;
-public:
-	TreeRB () {
-		root = current = sentinel = NULL;
-	}
-	
-	virtual ~TreeRB () {
-
-	}	 
-	
-	
-	virtual nodeRB<T> * search (nodeRB<T> * node, T searchKey) {
-		while ((node != NULL) and (node->key != searchKey)) {
-        	if (searchKey < node->key) {
-            	node = node->left;
-          	}
-        	else {
-        	    node = node->right;
-        	}
-        }
-   		return node;
-	}
-	
-	//Element najbardziej po lewej będzie najmniejszy
-	virtual nodeRB<T> * searchMin (nodeRB<T> * node) {
-		while (node->left != NULL) {
-		    node = node->left;
-		}
-		return node;
-    }
-    
-    //analogicznie
-    virtual nodeRB<T> * searchMax (nodeRB<T> * node) {
-		while (node->right != NULL) {
-		    node = node->right;
-		}
-		return node;
-    }
-    
-//    virtual void rightRot (nodeRB<T> * node);
-//	virtual void leftRot  (nodeRB<T> * node);
-//	virtual void restore (nodeRB<T> * node);
-//	virtual void insert(nodeRB<T> * node); 
-//	virtual void remove(nodeRB<T> * node);
-//    	
-	
-	
-	
-	virtual void print(std::ostream & out) {
-		//coś
-	}
 
 
 };
