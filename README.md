@@ -25,9 +25,11 @@ Zadania
 
 Praca na zajęciach: [6773bce](https://github.com/218582/pamsi/tree/6773bce16d793091c32113be8915c2af218e95fe)
 
-Kod: w toku...
+Wstępny kod i sprawozdanie: drzewo, ale nie czerwono-czarne:
 
-Sprawozdanie: w toku...
+Kod: [c0886c1](https://github.com/218582/pamsi/tree/c0886c1d7cb1aaa41478032edbed16772f3f116d)
+
+Sprawozdanie: [tree1.pdf](https://github.com/218582/pamsi/blob/c0886c1d7cb1aaa41478032edbed16772f3f116d/prj/tree1.pdf)
 
 Zadania
 
