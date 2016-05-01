@@ -10,19 +10,51 @@ using namespace std;
 
 
 
+
 int main (void) { 
 
-	ITreeRB<int> * tree = new TreeRB<int>;
+	int liczbaElementow[] = {10, 100, 1000, 10000, 100000, 1000000, 10000000};
+	double timeW = 0;
+	double timeS = 0;
+	
+	ofstream WynikiWrite;
+	WynikiWrite.open("WynikiWrite",std::ios::app);
+	if(!WynikiWrite.is_open()){
+    	cerr << "Nie otwarty plik!"<< endl;
+   	 return 1;
+	}
+	
+	ofstream WynikiSearch;
+	WynikiSearch.open("WynikiSearch",std::ios::app);
+	if(!WynikiSearch.is_open()){
+    	cerr << "Nie otwarty plik!"<< endl;
+   	 return 1;
+	}
+	
 	try {
-		tree->insert(4);
-		tree->insert(7);
-		tree->insert(-1);
-		tree->insert(-5);
-		tree->insert(3);
-		tree->insert(6);
-		tree->insert(10);
-		//cout << tree;
-		if(tree->search(3)) cout << "FOUND\n";
+		WynikiWrite << "#Wpisywanie" << endl;
+		WynikiSearch << "#Wyszukiwanie" << endl;
+		for (int i=0; i<6; i++) { //ilość testów
+			for(int j=0; j<10; j++) {
+				IStoper * stoper = new Stoper;
+				tree_test test;
+				stoper->start();
+				test.prepare(liczbaElementow[i]);
+				stoper->stop();
+				timeW = timeW+(stoper->getElapsedTimeMs());
+				stoper->start();
+				test.run();
+				stoper->stop();
+				timeS = timeS+(stoper->getElapsedTimeMs());
+			}
+			timeW = timeW / 10;
+			timeS = timeS / 10;
+			WynikiWrite << liczbaElementow[i] << " " << timeW << endl;
+			WynikiSearch << liczbaElementow[i] << " " << timeS << endl;
+			timeW = 0;
+			timeS = 0;
+			cout << "Test dla " << liczbaElementow[i] << " zakonczony." << endl;
+		}
 	}
 	catch (CriticalException & except) {
 		cout << "Critical Exception: " << except << endl;
@@ -36,8 +68,40 @@ int main (void) {
 	catch (...) {
 		cout << "Totally unknown!" << endl;
 	}
-	
 }
+
+
+
+
+
+
+
+//	ITreeRB<int> * tree = new TreeRB<int>;
+//	try {
+//		tree->insert(4);
+//		tree->insert(7);
+//		tree->insert(-1);
+//		tree->insert(-5);
+//		tree->insert(3);
+//		tree->insert(6);
+//		tree->insert(10);
+//		//cout << tree;
+//		if(tree->search(3)) cout << "FOUND\n";
+//	}
+//	catch (CriticalException & except) {
+//		cout << "Critical Exception: " << except << endl;
+//	}
+//	catch (ContinueException & except) {
+//		cout << "Exception: " << except << endl;
+//	}
+//	catch (ExceptionBase & base) {
+//		cout << "Exception" << base << endl;
+//	}
+//	catch (...) {
+//		cout << "Totally unknown!" << endl;
+//	}
+//	
+//}
 //	ITreeRB<int> * tree = new TreeRB<int>; 
 //	try {
 //		nodeRB<int> one (5);

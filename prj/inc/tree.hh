@@ -1,6 +1,7 @@
 #ifndef _TREE_HH
 #define _TREE_HH
 #include <iostream>
+#include <ctime>
 #include "except.hh"
 #include "tabl.hh"
 #include "run.hh"
@@ -334,6 +335,7 @@ public:
 		else if (node->right != NULL && element > node->key) {
 			insert(element, node->right);
 		}
+		else return; //następny element do wpisania - prawdopodobnie już mamy taki w drzewie
 	}
 	
 	virtual bool search (T k) {
@@ -356,6 +358,63 @@ public:
 		else return false;
 	}
 	
+};
+
+
+class tree_test : public IRunnable {
+private:
+	ITreeRB<int> * testtree;
+	int counter;
+	int testsize;
+		/*!
+	 * \brief Metoda ustawia punkt startowy generatora
+	 * pseudolosowego.
+	 */
+	void seedSrand (void) {
+		srand(clock());
+	}
+	
+	/*!
+	 * \brief Metoda generuje liczbę pseudolosową z zakresu 0..9
+	 *
+	 *\retval Liczba pseudolosowa
+	 */
+	int generateRandomDgt () {
+		return rand()%(testsize*1000);
+	}
+	
+public:
+	tree_test () : testtree(new TreeRB<int>) {
+		seedSrand();
+	} 
+	
+	virtual ~tree_test () {
+		delete testtree;
+	}
+	
+	virtual bool prepare (int sizeOfTest) {
+		counter = sizeOfTest;
+		testsize = sizeOfTest;
+		try {
+			for (;counter>0;counter--) {
+				testtree->insert(generateRandomDgt());
+			}
+		}
+		catch (...) {
+			throw;
+		}
+		return true;
+	}
+	
+	virtual bool run () {
+		try {
+			testtree->search(generateRandomDgt());
+		}
+		catch (...) {
+			throw;
+		}
+		return true;
+	}
 };
 
 
