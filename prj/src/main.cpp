@@ -11,21 +11,18 @@ using namespace std;
 
 
 int main (void) { 
-//	ITreeRB<int> * tree = new TreeRB<int>; 
+
+	ITreeRB<int> * tree = new TreeRB<int>;
 	try {
-		nodeRB<int> one (5);
-		nodeRB<int> two (4);
-		nodeRB<int> three (3);
-		one.setColour(red);
-		two.setUp(&one);
-		one.setLeft(&two);
-		three.setUp(&one);
-		one.setRight(&three);
-		cout << "Key: " << one.getKey() << endl;
-		cout << "Colour: " << one.getColour() << endl;
-		cout << "Left: "<< one.getLeft() << " : " << one.getLeftKey() << endl;
-		cout << "Right: " << one.getRight() << " : " << one.getRightKey() << endl;
-		cout << "Up: " << one.getUp() << " : " << one.getUpKey() << endl;	
+		tree->insert(4);
+		tree->insert(7);
+		tree->insert(-1);
+		tree->insert(-5);
+		tree->insert(3);
+		tree->insert(6);
+		tree->insert(10);
+		//cout << tree;
+		if(tree->search(3)) cout << "FOUND\n";
 	}
 	catch (CriticalException & except) {
 		cout << "Critical Exception: " << except << endl;
@@ -41,6 +38,52 @@ int main (void) {
 	}
 	
 }
+//	ITreeRB<int> * tree = new TreeRB<int>; 
+//	try {
+//		nodeRB<int> one (5);
+//		nodeRB<int> two (4);
+//		nodeRB<int> three (3);
+//		one.setColour(red);
+//		two.setParent(&one);
+//		one.setLeft(&two);
+//		three.setParent(&one);
+//		one.setRight(&three);
+//		cout << "ONE: \n";
+//		cout << "Key: " << one.getKey() << endl;
+//		cout << "Colour: " << one.getColour() << endl;
+//		cout << "Left: "<< one.getLeft() << " : " << one.getLeftKey() << endl;
+//		cout << "Right: " << one.getRight() << " : " << one.getRightKey() << endl;
+//		cout << "Up: " << one.getParent() << " : " << one.getParentKey() << endl;	
+//		
+//		cout << "TWO: \n";
+//		cout << "Key: " << two.getKey() << endl;
+//		cout << "Colour: " << two.getColour() << endl;
+//		cout << "Left: "<< two.getLeft() << " : " << two.getLeftKey() << endl;
+//		cout << "Right: " << two.getRight() << " : " << two.getRightKey() << endl;
+//		cout << "Up: " << two.getParent() << " : " << two.getParentKey() << endl;
+//		
+//		cout << "THREE: \n";
+//		cout << "Key: " << three.getKey() << endl;
+//		cout << "Colour: " << three.getColour() << endl;
+//		cout << "Left: "<< three.getLeft() << " : " << three.getLeftKey() << endl;
+//		cout << "Right: " << three.getRight() << " : " << three.getRightKey() << endl;
+//		cout << "Up: " << three.getParent() << " : " << three.getParentKey() << endl;
+//		
+//	}
+//	catch (CriticalException & except) {
+//		cout << "Critical Exception: " << except << endl;
+//	}
+//	catch (ContinueException & except) {
+//		cout << "Exception: " << except << endl;
+//	}
+//	catch (ExceptionBase & base) {
+//		cout << "Exception" << base << endl;
+//	}
+//	catch (...) {
+//		cout << "Totally unknown!" << endl;
+//	}
+//	
+//}
 	
 //	int liczbaElementow[] = {10, 100, 1000, 10000, 100000, 1000000};
 //	double timeW = 0;

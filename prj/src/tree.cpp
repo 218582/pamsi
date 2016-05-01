@@ -2,10 +2,10 @@
 
 std::ostream & operator << (std::ostream & output, Colour col) {
 	if (col == red) {
-		output << "red";
+		output << "R";
 	} 
 	else if (col == black) {
-		output << "black";
+		output << "B";
 	}
 	return output;
 }
