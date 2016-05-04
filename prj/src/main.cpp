@@ -10,22 +10,36 @@ using namespace std;
 
 
 int main(void) {
-
-	IGraph * grph = new Graph;
-	grph->insertVertex(2);
-	grph->insertVertex(5);
-	grph->insertVertex(3);
-	grph->insertEdge(0,1);
-	grph->insertEdge(1,2);
-	grph->insertEdge(0,2);
-	cout<<grph->getNeightbours(0);
-	cout<<endl;
-	cout<<grph->getNeightbours(1);
-	cout<<endl;
-	cout<<grph->getNeightbours(2);
-	cout<<endl;
+	try{
+		IGraph * grph = new Graph;
+		grph->insertVertex(2);
+		grph->insertVertex(5);
+		grph->insertVertex(3);
+		grph->insertEdge(0,1);
+		grph->insertEdge(1,2);
+		//grph->insertEdge(0,2);
+		cout<< "Sąsiedzi 0: "<<grph->getNeightbours(0);
+		cout<<endl;
+		cout<< "Sąsiedzi 1: "<<grph->getNeightbours(1)<<endl;
+		cout<< "Sąsiedzi 2: "<<grph->getNeightbours(2)<<endl;
+		cout<< "------" <<endl;
+		cout << "Czy 0 i 1 są sąsiadami? "<< grph->areAdjacent(0,1) << endl;
+		cout << "Czy 0 i 2 są sąsiadami? "<< grph->areAdjacent(0,2) << endl;
+		
+	}
+	catch (CriticalException & except) {
+		cout << "Critical Exception: " << except << endl;
+	}
+	catch (ContinueException & except) {
+		cout << "Exception: " << except << endl;
+	}
+	catch (ExceptionBase & base) {
+		cout << "Exception" << base << endl;
+	}
+	catch (...) {
+		cout << "Totally unknown!" << endl;
+	}
 	
-	//cout << grph->areAdjacent(0,1);
 }
 
 

@@ -4,32 +4,6 @@
 #include "tabl.hh"
 
 /*!
- *\brief Klasa definiuje węzeł listy sąsiedztwa
- */
-//class gNode {
-//public:
-//	int marker;
-//	class gNode * next;
-//	
-//	/*!
-//	 *\brief Konstruktor nowego węzła
-//	 */
-//	gNode (int mark, class gNode * nxt = NULL) {
-//		marker = mark;
-//		next = nxt;
-//	}
-//	
-//	/*!
-//	 *\brief Przeciążenie operatora << dla klasy gNode
-//	 */
-//	friend std::ostream & operator << (std::ostream & output, const gNode * to) {
-//			output << marker;
-//			return output;
-//	}
-//	
-//};
-
-/*!
  *\brief Interfejs grafu
  */
 class IGraph {	
@@ -94,13 +68,13 @@ public:
 	  *\brief Dodaje powiązanie między dwoma elementami
 	  */
 	 virtual void insertEdge(int index1, int index2) {
-//		if ((index1 < elements->nOE()-1) || (index2 < elements->nOE()-1) || (index1 < edges->nOE()-1) || (index2 < edges->nOE()-1)) {
-//			throw CriticalException("GraphInsertIndexWrong");
-//		}
-//		else {
+		if ((index1 > elements->nOE()-1) || (index2 > elements->nOE()-1) || (index1 > edges->nOE()-1) || (index2 > edges->nOE()-1)) {
+			throw CriticalException("GraphInsertIndexWrong");
+		}
+		else {
 			edges->operator[](index1)->add(index2);
 			edges->operator[](index2)->add(index1);
-//		}
+		}
 		
 	 }
 	 
@@ -108,7 +82,7 @@ public:
 	  *\brief Sprawdza, czy dwa elementy mają krawędź między sobą
 	  */
 	 virtual bool areAdjacent(int index1,int index2) {
-		if ((index1 < elements->nOE()-1) || (index2 < elements->nOE()-1) || (index1 < edges->nOE()-1) || (index2 < edges->nOE()-1)) {
+		if ((index1 > elements->nOE()-1) || (index2 > elements->nOE()-1) || (index1 > edges->nOE()-1) || (index2 > edges->nOE()-1)) {
 			throw CriticalException("GraphInsertIndexWrong");
 		}
 		else {
