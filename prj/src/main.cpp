@@ -9,67 +9,86 @@ using namespace std;
 //#include <numeric>
 
 
+int main(void) {
 
-
-int main (void) { 
-
-	int liczbaElementow[] = {10, 100, 1000, 10000, 100000, 1000000, 10000000};
-	double timeW = 0;
-	double timeS = 0;
+	IGraph * grph = new Graph;
+	grph->insertVertex(2);
+	grph->insertVertex(5);
+	grph->insertVertex(3);
+	grph->insertEdge(0,1);
+	grph->insertEdge(1,2);
+	grph->insertEdge(0,2);
+	cout<<grph->getNeightbours(0);
+	cout<<endl;
+	cout<<grph->getNeightbours(1);
+	cout<<endl;
+	cout<<grph->getNeightbours(2);
+	cout<<endl;
 	
-	ofstream WynikiWrite;
-	WynikiWrite.open("WynikiWrite",std::ios::app);
-	if(!WynikiWrite.is_open()){
-    	cerr << "Nie otwarty plik!"<< endl;
-   	 return 1;
-	}
-	
-	ofstream WynikiSearch;
-	WynikiSearch.open("WynikiSearch",std::ios::app);
-	if(!WynikiSearch.is_open()){
-    	cerr << "Nie otwarty plik!"<< endl;
-   	 return 1;
-	}
-	
-	try {
-		WynikiWrite << "#Wpisywanie" << endl;
-		WynikiSearch << "#Wyszukiwanie" << endl;
-		for (int i=0; i<6; i++) { //ilość testów
-			for(int j=0; j<10; j++) {
-				IStoper * stoper = new Stoper;
-				tree_test test;
-				stoper->start();
-				test.prepare(liczbaElementow[i]);
-				stoper->stop();
-				timeW = timeW+(stoper->getElapsedTimeMs());
-				stoper->start();
-				test.run();
-				stoper->stop();
-				timeS = timeS+(stoper->getElapsedTimeMs());
-			}
-			timeW = timeW / 10;
-			timeS = timeS / 10;
-			WynikiWrite << liczbaElementow[i] << " " << timeW << endl;
-			WynikiSearch << liczbaElementow[i] << " " << timeS << endl;
-			timeW = 0;
-			timeS = 0;
-			cout << "Test dla " << liczbaElementow[i] << " zakonczony." << endl;
-		}
-	}
-	catch (CriticalException & except) {
-		cout << "Critical Exception: " << except << endl;
-	}
-	catch (ContinueException & except) {
-		cout << "Exception: " << except << endl;
-	}
-	catch (ExceptionBase & base) {
-		cout << "Exception" << base << endl;
-	}
-	catch (...) {
-		cout << "Totally unknown!" << endl;
-	}
+	//cout << grph->areAdjacent(0,1);
 }
 
+
+//TEST DLA DRZEWA---------------------------------------------------------------
+//int main (void) { 
+
+//	int liczbaElementow[] = {10, 100, 1000, 10000, 100000, 1000000, 10000000};
+//	double timeW = 0;
+//	double timeS = 0;
+//	
+//	ofstream WynikiWrite;
+//	WynikiWrite.open("WynikiWrite",std::ios::app);
+//	if(!WynikiWrite.is_open()){
+//    	cerr << "Nie otwarty plik!"<< endl;
+//   	 return 1;
+//	}
+//	
+//	ofstream WynikiSearch;
+//	WynikiSearch.open("WynikiSearch",std::ios::app);
+//	if(!WynikiSearch.is_open()){
+//    	cerr << "Nie otwarty plik!"<< endl;
+//   	 return 1;
+//	}
+//	
+//	try {
+//		WynikiWrite << "#Wpisywanie" << endl;
+//		WynikiSearch << "#Wyszukiwanie" << endl;
+//		for (int i=0; i<6; i++) { //ilość testów
+//			for(int j=0; j<10; j++) {
+//				IStoper * stoper = new Stoper;
+//				tree_test test;
+//				stoper->start();
+//				test.prepare(liczbaElementow[i]);
+//				stoper->stop();
+//				timeW = timeW+(stoper->getElapsedTimeMs());
+//				stoper->start();
+//				test.run();
+//				stoper->stop();
+//				timeS = timeS+(stoper->getElapsedTimeMs());
+//			}
+//			timeW = timeW / 10;
+//			timeS = timeS / 10;
+//			WynikiWrite << liczbaElementow[i] << " " << timeW << endl;
+//			WynikiSearch << liczbaElementow[i] << " " << timeS << endl;
+//			timeW = 0;
+//			timeS = 0;
+//			cout << "Test dla " << liczbaElementow[i] << " zakonczony." << endl;
+//		}
+//	}
+//	catch (CriticalException & except) {
+//		cout << "Critical Exception: " << except << endl;
+//	}
+//	catch (ContinueException & except) {
+//		cout << "Exception: " << except << endl;
+//	}
+//	catch (ExceptionBase & base) {
+//		cout << "Exception" << base << endl;
+//	}
+//	catch (...) {
+//		cout << "Totally unknown!" << endl;
+//	}
+//}
+//KONIEC TESTU DLA DRZEWA-------------------------------------------------------
 
 
 

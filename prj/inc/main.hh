@@ -15,6 +15,7 @@
 #include "asoc.hh"
 #include "hash.hh"
 #include "tree.hh"
+#include "graph.hh"
 
 /*! \mainpage 
  *

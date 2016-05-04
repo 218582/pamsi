@@ -88,10 +88,17 @@ public:
 	 */
 	 virtual void bubblesort() = 0;
 	 
+	 /*!
+	 *\brief znajduje element w tablicy
+	 *
+	 *\retval true gdy element został znaleziony
+	 */
+	 virtual bool search(T) = 0;
+	 
 	 //Jest OK
 	 friend std::ostream & operator << (std::ostream & output, /*const - BEZ TEGO DZIAŁA*/  Itabn<T> * to) {
 		for (int i=0; i<(to->nOE());i++) {
-			output << to->show(i) << '\n';
+			output << to->show(i) << " ";
 		}
 		return output;
 	}
@@ -247,6 +254,13 @@ public:
 	 */
 	virtual int aSize(void);
 	
+	/*!
+	 *\brief znajduje element w tablicy
+	 *
+	 *\retval true gdy element został znaleziony
+	 */
+	 virtual bool search(T);
+	
 
 	
 	/*!
@@ -301,6 +315,13 @@ public:
 };
 
 
+template <class T>
+bool tabn<T>::search (T elem) {
+	for(int i=0; i<numberOfElems; i++) {
+		if (tab[i] == elem) return true;
+	}
+	return false;
+}
 
 template <class T>
 void tabn<T>::add (T element) {

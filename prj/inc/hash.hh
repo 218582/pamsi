@@ -61,6 +61,11 @@ public:
 		else return false;
 	}
 	
+	friend bool operator == (entry<T,T2> one, entry<T,T2> two) {
+		if (one.key == two.key) return true;
+		else return false;
+	}
+	
 	friend std::ostream & operator << (std::ostream & output, const entry<T,T2> & to) {
 		output <<  '\t' << to.key << " : " << to.value;
 		return output;
