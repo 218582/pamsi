@@ -40,7 +40,7 @@ obj/asoc.o: src/asoc.cpp inc/asoc.hh inc/hash.hh inc/tabl.hh inc/except.hh
 obj/tree.o: src/tree.cpp inc/tree.hh inc/tabl.hh inc/except.hh
 	$(G) $(GFLAGS) -c ./src/tree.cpp -o ./obj/tree.o
 	
-obj/graph.o: src/graph.cpp inc/graph.hh inc/tabl.hh
+obj/graph.o: src/graph.cpp inc/graph.hh inc/tabl.hh inc/lista.hh inc/stos.hh inc/kolejka.hh
 	$(G) $(GFLAGS) -c ./src/graph.cpp -o ./obj/graph.o
 
 	

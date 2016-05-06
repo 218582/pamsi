@@ -10,21 +10,10 @@ using namespace std;
 
 
 int main(void) {
+	test_graph mytest;
 	try{
-		IGraph * grph = new Graph;
-		grph->insertVertex(2);
-		grph->insertVertex(5);
-		grph->insertVertex(3);
-		grph->insertEdge(0,1);
-		grph->insertEdge(1,2);
-		//grph->insertEdge(0,2);
-		cout<< "Sąsiedzi 0: "<<grph->getNeightbours(0);
-		cout<<endl;
-		cout<< "Sąsiedzi 1: "<<grph->getNeightbours(1)<<endl;
-		cout<< "Sąsiedzi 2: "<<grph->getNeightbours(2)<<endl;
-		cout<< "------" <<endl;
-		cout << "Czy 0 i 1 są sąsiadami? "<< grph->areAdjacent(0,1) << endl;
-		cout << "Czy 0 i 2 są sąsiadami? "<< grph->areAdjacent(0,2) << endl;
+		mytest.prepare(10);
+		mytest.run();
 		
 	}
 	catch (CriticalException & except) {
@@ -42,6 +31,22 @@ int main(void) {
 	
 }
 
+
+
+//IGraph * grph = new Graph;
+//		grph->insertVertex();
+//		grph->insertVertex();
+//		grph->insertVertex();
+//		grph->insertEdge(0,1);
+//		grph->insertEdge(1,2);
+//		//grph->insertEdge(0,2);
+//		cout<< "Sąsiedzi 0: "<<grph->getNeightbours(0);
+//		cout<<endl;
+//		cout<< "Sąsiedzi 1: "<<grph->getNeightbours(1)<<endl;
+//		cout<< "Sąsiedzi 2: "<<grph->getNeightbours(2)<<endl;
+//		cout<< "------" <<endl;
+//		cout << "Czy 0 i 1 są sąsiadami? "<< grph->areAdjacent(0,1) << endl;
+//		cout << "Czy 0 i 2 są sąsiadami? "<< grph->areAdjacent(0,2) << endl;
 
 //TEST DLA DRZEWA---------------------------------------------------------------
 //int main (void) { 

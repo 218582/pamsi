@@ -63,6 +63,11 @@ public:
 	virtual int nOE(void) = 0;
 	
 	/*!
+	 *\brief Zwraca index ostatniego elementu
+	 */
+	 virtual int maxIndex(void) = 0;
+	
+	/*!
 	 *\brief Zwraca ilość miejsca w tablicy
 	 */
 	virtual int aSize(void) = 0;
@@ -247,6 +252,11 @@ public:
 	 */
 	virtual int nOE(void);
 	
+	/*!
+	 *\brief Zwraca index ostatniego elementu
+	 */
+	 virtual int maxIndex(void);
+	 
 	/*!
 	 *\brief zwraca wielkość zaalokowanej przestrzeni dla tablicy
 	 *
@@ -497,6 +507,11 @@ template <class T>
 int tabn<T>::nOE(void) {
 		return numberOfElems;
 	}
+
+template <class T>
+int tabn<T>::maxIndex(void) {
+	return numberOfElems-1;
+}
 	
 template <class T>
 int tabn<T>::aSize(void) {

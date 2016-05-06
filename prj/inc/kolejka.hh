@@ -45,6 +45,22 @@ public:
 	 *\brief Destruktor wirtualny interfejsu
 	 */
 	virtual ~IKolejka() {}
+	
+	private:
+
+	/*!
+	 *\brief Wyświetlanie stosu
+	 */
+	virtual void print (std::ostream &)=0;
+
+public:	
+	/*!
+	 *\brief Przeciążenie operatora <<
+	 */
+	friend std::ostream & operator << (std::ostream & output, IKolejka * to) {
+		to->print(output);
+		return output;
+	}
 };
 
 /*!
@@ -106,6 +122,11 @@ public:
 	 */
 	virtual ~Kolejka() {
 		delete tablica;
+	}
+	
+	private:
+	virtual void print (std::ostream & output) {
+		output << tablica;
 	}
 };
 

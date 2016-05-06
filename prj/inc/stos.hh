@@ -51,6 +51,22 @@ public:
 	 *\brief Destruktor wirtualny IStos
 	 */
 	virtual ~IStos(){}
+	
+private:
+
+	/*!
+	 *\brief Wyświetlanie stosu
+	 */
+	virtual void print (std::ostream &)=0;
+
+public:	
+	/*!
+	 *\brief Przeciążenie operatora <<
+	 */
+	friend std::ostream & operator << (std::ostream & output, IStos * to) {
+		to->print(output);
+		return output;
+	}
 };
 
 
@@ -129,6 +145,12 @@ public:
 	virtual ~Stos(){
 		delete tablica;
 	}
+	
+private:
+	virtual void print (std::ostream & output) {
+		output << tablica;
+	}
+	
 };
 
 template <class T>
