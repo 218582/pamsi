@@ -302,7 +302,6 @@ private:
 	
 public:
 
-	//COŚ JESZCZE NIE TAK
 	/*!
 	 *\brief Dodaje element na koniec kolejki
 	 *

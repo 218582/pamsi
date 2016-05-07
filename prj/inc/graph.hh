@@ -171,8 +171,9 @@ public:
 	 /*!
 	  *\brief Przeszukuje graf wszerz
 	  */
+	  
 	  virtual Itabn<int>* BFS(void) {
-//	  	std::cout << edges << std::endl;
+	  	std::cout << edges << std::endl;
 	 	Itabn<int> * bfs = new tabn<int>;
 		IQueue<int> * found = new Queue<int>;
 		int * visited = new int[elements->nOE()];
@@ -189,18 +190,18 @@ public:
 			visited[bfs->show(bfs->maxIndex())] = 1;
 			Itabn<int> * neightb = new tabn<int>();
 			neightb = getNeightbours(bfs->show(bfs->maxIndex()));
-			neightb->bubblesort();
-//			std::cout << "sąsiedzi " << bfs->show(bfs->maxIndex()) << " : " << neightb << '\n';
+				neightb->bubblesort();
+				std::cout << "sąsiedzi " << bfs->show(bfs->maxIndex()) << " : " << neightb << '\n';
 			
-			//Dodawanie nieodwiedzonych wierzchołków sąsiadujących do kolejki
-			for (int i = 0; i<=neightb->maxIndex(); i++) {
-				//Jeżeli nieodwiedzone
-				if (visited[neightb->show(i)] == 0) {
-					found->enqueue(neightb->show(i));
-					visited[found->get()] = 1;
+				//Dodawanie nieodwiedzonych wierzchołków sąsiadujących do kolejki
+				for (int i = 0; i<=neightb->maxIndex(); i++) {
+					//Jeżeli nieodwiedzone
+					if (visited[neightb->show(i)] == 0) {
+						found->enqueue(neightb->show(i));
+						visited[neightb->show(i)] = 1;
+					}
 				}
-			}
-//			std::cout << "Obecna kolejka: " << found << '\n';
+			std::cout << "Obecna kolejka: " << found << '\n';
 			delete neightb;
 		}
 		delete found;
@@ -301,13 +302,13 @@ private:
 	 
 public:
 	bool prepare(int testSize) {
-		generateGraph(testSize,testSize/2);
+		generateGraph(testSize,testSize*2);
 		//generateMaximumGraph(testSize);
 		return true;
 	}
 	
 	bool run (void) {
-//		graph->DFS();
+//		std::cout << graph->DFS();
 		std::cout<< graph->BFS();
 		return true;
 	}
