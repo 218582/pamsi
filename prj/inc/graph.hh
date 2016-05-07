@@ -132,7 +132,7 @@ public:
 	  *\brief Przeszukuje graf wgłąb
 	  */
 	 virtual Itabn<int>* DFS(void) {
-	 	std::cout << edges << std::endl;
+//	 	std::cout << edges << std::endl;
 	 	Itabn<int> * dfs = new tabn<int>;
 		IStos<int> * found = new Stos<int>;
 		int * visited = new int[elements->nOE()];
@@ -150,7 +150,7 @@ public:
 			Itabn<int> * neightb = new tabn<int>();
 			neightb = getNeightbours(dfs->show(dfs->maxIndex()));
 			neightb->bubblesort();
-			std::cout << "sąsiedzi " << dfs->show(dfs->maxIndex()) << " : " << neightb << '\n';
+//			std::cout << "sąsiedzi " << dfs->show(dfs->maxIndex()) << " : " << neightb << '\n';
 			
 			//Dodawanie nieodwiedzonych wierzchołków sąsiadujących do stosu
 			for (int i = neightb->maxIndex(); i>=0; i--) {
@@ -160,7 +160,7 @@ public:
 					visited[found->get()] = 1;
 				}
 			}
-			std::cout << "Obecny stos: " << found << '\n';
+//			std::cout << "Obecny stos: " << found << '\n';
 			delete neightb;
 		}
 		delete found;
@@ -172,16 +172,16 @@ public:
 	  *\brief Przeszukuje graf wszerz
 	  */
 	  virtual Itabn<int>* BFS(void) {
-	  	std::cout << edges << std::endl;
+//	  	std::cout << edges << std::endl;
 	 	Itabn<int> * bfs = new tabn<int>;
-		IKolejka<int> * found = new Kolejka<int>;
+		IQueue<int> * found = new Queue<int>;
 		int * visited = new int[elements->nOE()];
 		//wszystkie nieodwiedzone
 		for (int i=0; i<elements->nOE();i++) {
 			visited[i]=0;
 		}
 		
-		//Rozpoczęcie DFS
+		//Rozpoczęcie BFS
 		found->enqueue(0);
 		
 		while(!(found->isEmpty())) {
@@ -190,9 +190,9 @@ public:
 			Itabn<int> * neightb = new tabn<int>();
 			neightb = getNeightbours(bfs->show(bfs->maxIndex()));
 			neightb->bubblesort();
-			std::cout << "sąsiedzi " << bfs->show(bfs->maxIndex()) << " : " << neightb << '\n';
+//			std::cout << "sąsiedzi " << bfs->show(bfs->maxIndex()) << " : " << neightb << '\n';
 			
-			//Dodawanie nieodwiedzonych wierzchołków sąsiadujących do stosu
+			//Dodawanie nieodwiedzonych wierzchołków sąsiadujących do kolejki
 			for (int i = 0; i<=neightb->maxIndex(); i++) {
 				//Jeżeli nieodwiedzone
 				if (visited[neightb->show(i)] == 0) {
@@ -200,7 +200,7 @@ public:
 					visited[found->get()] = 1;
 				}
 			}
-			std::cout << "Obecna kolejka: " << found << '\n';
+//			std::cout << "Obecna kolejka: " << found << '\n';
 			delete neightb;
 		}
 		delete found;
@@ -307,8 +307,8 @@ public:
 	}
 	
 	bool run (void) {
-		//std::cout << graph->DFS();
-		std::cout << graph->BFS();
+//		graph->DFS();
+		std::cout<< graph->BFS();
 		return true;
 	}
 };

@@ -11,6 +11,7 @@ using namespace std;
 
 int main(void) {
 	test_graph mytest;
+
 	try{
 		mytest.prepare(10);
 		mytest.run();
