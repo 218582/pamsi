@@ -10,7 +10,7 @@ Praca na zajęciach: [d137c5e](https://github.com/218582/pamsi/tree/d137c5e7f86f
 
 Kod: [c9bd2db](https://github.com/218582/pamsi/tree/c9bd2dbd33cd66fb991032afb50646ecb0b06fd2)
 
-Sprawozdanie [graf.pdf](https://github.com/218582/pamsi/blob/c9bd2dbd33cd66fb991032afb50646ecb0b06fd2/prj/graf.pdf)
+Sprawozdanie [graf.pdf](https://github.com/218582/pamsi/blob/9609cc5f35b27108fc4eed0b189db7cc706241b1/prj/graf.pdf)
 
 Zadania 
 
