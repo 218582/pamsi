@@ -6,11 +6,11 @@
 
 ######Zajęcia 8 - 25 kwietnia
 
-Praca na zajęciach:
+Praca na zajęciach: [d137c5e](https://github.com/218582/pamsi/tree/d137c5e7f86f65a2e2eb971cd46f039fcf16fb8d)
 
-Kod: w toku...
+Kod: [c9bd2db](https://github.com/218582/pamsi/tree/c9bd2dbd33cd66fb991032afb50646ecb0b06fd2)
 
-Sprawozdanie: W toku...
+Sprawozdanie [graf.pdf](https://github.com/218582/pamsi/blob/c9bd2dbd33cd66fb991032afb50646ecb0b06fd2/prj/graf.pdf)
 
 Zadania 
 
