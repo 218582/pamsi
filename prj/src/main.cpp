@@ -10,11 +10,57 @@ using namespace std;
 
 
 int main(void) {
-	test_graph mytest;
+	int liczbaElementow[] = {10, 100, 1000, 10000, 100000, 1000000, 10000000,100000000};
+	
+	double timeDFS;
+	double timeBFS;
+	
+	ofstream WynikiDFS;
+	WynikiDFS.open("WynikiDFS",std::ios::app);
+	if(!WynikiDFS.is_open()){
+    	cerr << "Nie otwarty plik!"<< endl;
+   	 return 1;
+	}
+	
+	ofstream WynikiBFS;
+	WynikiBFS.open("WynikiBFS",std::ios::app);
+	if(!WynikiBFS.is_open()){
+    	cerr << "Nie otwarty plik!"<< endl;
+   	 return 1;
+	}
 
-	try{
-		mytest.prepare(10);
-		mytest.run();
+	try{		
+		WynikiDFS << "#PrzeszukiwanieDFS" << endl;
+		WynikiBFS << "#PrzeszukiwanieBFS" << endl;
+		for (int i=0; i<6; i++) { //ilość testów
+			for(int j=0; j<10; j++) {
+				{
+				IStoper * stoper = new Stoper;
+				test_graph_DFS dfstest;
+				dfstest.prepare(liczbaElementow[i]);
+				stoper->start();
+				dfstest.run();
+				stoper->stop();
+				timeDFS = timeDFS+(stoper->getElapsedTimeMs());
+				}
+				{
+				IStoper * stoper = new Stoper;
+				test_graph_BFS bfstest;
+				bfstest.prepare(liczbaElementow[i]);
+				stoper->start();
+				bfstest.run();
+				stoper->stop();
+				timeBFS = timeBFS+(stoper->getElapsedTimeMs());
+				}
+			}
+			timeBFS = timeBFS / 10;
+			timeDFS = timeDFS / 10;
+			WynikiDFS << liczbaElementow[i] << " " << timeDFS << endl;
+			WynikiBFS << liczbaElementow[i] << " " << timeBFS << endl;
+			timeBFS = 0;
+			timeDFS = 0;
+			cout << "Testy dla " << liczbaElementow[i] << " zakonczone." << endl;
+		}
 		
 	}
 	catch (CriticalException & except) {

@@ -173,7 +173,7 @@ public:
 	  */
 	  
 	  virtual Itabn<int>* BFS(void) {
-	  	std::cout << edges << std::endl;
+//	  	std::cout << edges << std::endl;
 	 	Itabn<int> * bfs = new tabn<int>;
 		IQueue<int> * found = new Queue<int>;
 		int * visited = new int[elements->nOE()];
@@ -191,7 +191,7 @@ public:
 			Itabn<int> * neightb = new tabn<int>();
 			neightb = getNeightbours(bfs->show(bfs->maxIndex()));
 				neightb->bubblesort();
-				std::cout << "sąsiedzi " << bfs->show(bfs->maxIndex()) << " : " << neightb << '\n';
+//				std::cout << "sąsiedzi " << bfs->show(bfs->maxIndex()) << " : " << neightb << '\n';
 			
 				//Dodawanie nieodwiedzonych wierzchołków sąsiadujących do kolejki
 				for (int i = 0; i<=neightb->maxIndex(); i++) {
@@ -201,7 +201,7 @@ public:
 						visited[neightb->show(i)] = 1;
 					}
 				}
-			std::cout << "Obecna kolejka: " << found << '\n';
+//			std::cout << "Obecna kolejka: " << found << '\n';
 			delete neightb;
 		}
 		delete found;
@@ -212,7 +212,7 @@ public:
 };
 
 
-class test_graph : public IRunnable {
+class test_graph_BFS : public IRunnable {
 
 private:
 
@@ -228,7 +228,7 @@ private:
 	
 public:
 	
-	test_graph () : graph(new Graph()) {
+	test_graph_BFS () : graph(new Graph()) {
 	}
 	
 private:
@@ -309,12 +309,115 @@ public:
 	
 	bool run (void) {
 //		std::cout << graph->DFS();
-		std::cout<< graph->BFS();
+		graph->BFS();
 		return true;
 	}
 };
 
 
+
+
+class test_graph_DFS : public IRunnable {
+
+private:
+
+	IGraph * graph;
+
+	/*!
+	 * \brief Metoda ustawia punkt startowy generatora
+	 * pseudolosowego.
+	 */
+	void seedSrand (void) {
+		srand(clock());
+	}
+	
+public:
+	
+	test_graph_DFS () : graph(new Graph()) {
+	}
+	
+private:
+
+
+	/*!
+	 *\brief Dodaje określoną ilość wierzchołków do grafu
+	 */
+	 void addElementsOfGraph(int numberOfVertices) {
+	 	for (int i=0; i <numberOfVertices;i++) {
+	 		graph->insertVertex();
+	 	}
+	 }
+	
+	/*!
+	 *\brief Generuje losowy najmniejszy graf spójny
+	 */
+	 void generateMinimalConnectedGraph(int numberOfVertices) {
+	 	addElementsOfGraph(numberOfVertices);
+	 	seedSrand();
+	 	for (int j=0; j<numberOfVertices;j++) {
+	 		if (j==0); //nic nie rób  - nie łączę pierwszego el. z żadnym
+	 		else {
+	 			int t = (rand() %j);
+	 			graph->insertEdge(t,j);
+	 		}
+	 	}
+	 }
+	 
+	/*!
+	 *\brief Generuje graf spójny o określonej liczbie krawędzi
+	 */
+	void generateGraph(int numberOfVertices, int numberOfEdg) {
+	 	generateMinimalConnectedGraph(numberOfVertices);
+	 	
+	 	int needMore = numberOfEdg - graph->numberOfEdges();
+	 	
+	 	for (int i = 0; i < needMore; i++) {
+	 		int one = rand()%(numberOfVertices-1);
+	 		int two = rand()%(numberOfVertices-1);
+	 		
+	 		while (graph->areAdjacent(one,two) || one == two) {
+	 			one = rand()%(numberOfVertices-1);
+	 			two = rand()%(numberOfVertices-1);
+	 		}
+	 		graph->insertEdge(one,two);
+	 	}
+	 }
+	 
+	 /*!
+	  *\brief Generuje efektywniej graf o maksymalnej liczbie krawedzi
+	  * Gererowanie grafu o ilości krawędzi bliskiej (a szczególnie równej) maksymalnej może spowodować
+	  * znaczne wydłużenie czasu generowania grafu - możliwy jest długi czas oczekiwania na wylosowanie 
+	  * nowej krawędzi
+	  */
+	 void generateMaximumGraph (int numberOfVertices) {
+	 	addElementsOfGraph(numberOfVertices);
+	 	//Obliczanie ilości krawędzi
+	 	int requiredNumberOfEdges=0;
+	 	for(int i = numberOfVertices-1; i>0;i--) {
+			requiredNumberOfEdges+=i;
+		}
+		
+		//Dodawanie wszystkich krawedzi
+		for (int i = numberOfVertices-1; i>0; i--) {
+			for (int j=0;j<i;j++) {
+				graph->insertEdge(i,j);	
+			}
+		}
+	 }
+	 
+public:
+	bool prepare(int testSize) {
+		generateGraph(testSize,testSize*2);
+		//generateMaximumGraph(testSize);
+		return true;
+	}
+	
+	bool run (void) {
+		graph->DFS();
+//		std::cout<< graph->BFS();
+		return true;
+	}
+};
 
 
 
