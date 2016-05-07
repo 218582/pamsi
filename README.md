@@ -14,11 +14,11 @@ Sprawozdanie: W toku...
 
 Zadania 
 
-- [ ] Zaimplementować graf
-- [ ] Uzasadnić wybrany sposób reprezentacji grafu
-- [ ] Zaimplementować DFS i BFS
-- [ ] Zbadać czas przeszukiwania DFS i BFS dla |V| = {10, 100, 1 000, 1 000 000}
-- [ ] Wyniki przedstawić w sprawozdaniu
+- [x] Zaimplementować graf
+- [x] Uzasadnić wybrany sposób reprezentacji grafu
+- [x] Zaimplementować DFS i BFS
+- [x] Zbadać czas przeszukiwania DFS i BFS dla |V| = {10, 100, 1 000, 1 000 000}
+- [x] Wyniki przedstawić w sprawozdaniu
 
 
 ######Zajęcia 7 - 18 kwietnia

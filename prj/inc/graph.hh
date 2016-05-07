@@ -149,7 +149,6 @@ public:
 			visited[dfs->show(dfs->maxIndex())] = 1;
 			Itabn<int> * neightb = new tabn<int>();
 			neightb = getNeightbours(dfs->show(dfs->maxIndex()));
-			neightb->bubblesort();
 //			std::cout << "sąsiedzi " << dfs->show(dfs->maxIndex()) << " : " << neightb << '\n';
 			
 			//Dodawanie nieodwiedzonych wierzchołków sąsiadujących do stosu
@@ -190,7 +189,6 @@ public:
 			visited[bfs->show(bfs->maxIndex())] = 1;
 			Itabn<int> * neightb = new tabn<int>();
 			neightb = getNeightbours(bfs->show(bfs->maxIndex()));
-				neightb->bubblesort();
 //				std::cout << "sąsiedzi " << bfs->show(bfs->maxIndex()) << " : " << neightb << '\n';
 			
 				//Dodawanie nieodwiedzonych wierzchołków sąsiadujących do kolejki
@@ -217,6 +215,7 @@ class test_graph_BFS : public IRunnable {
 private:
 
 	IGraph * graph;
+	int numberOfV;
 
 	/*!
 	 * \brief Metoda ustawia punkt startowy generatora
@@ -238,6 +237,7 @@ private:
 	 *\brief Dodaje określoną ilość wierzchołków do grafu
 	 */
 	 void addElementsOfGraph(int numberOfVertices) {
+	 	numberOfV = numberOfVertices;
 	 	for (int i=0; i <numberOfVertices;i++) {
 	 		graph->insertVertex();
 	 	}
@@ -265,6 +265,7 @@ private:
 	 	generateMinimalConnectedGraph(numberOfVertices);
 	 	
 	 	int needMore = numberOfEdg - graph->numberOfEdges();
+	 	if (needMore <= 0) return;
 	 	
 	 	for (int i = 0; i < needMore; i++) {
 	 		int one = rand()%(numberOfVertices-1);
@@ -302,13 +303,17 @@ private:
 	 
 public:
 	bool prepare(int testSize) {
+//		int requiredNumberOfEdges=0;
+//	 	for(int i = numberOfV-1; i>0;i--) {
+//			requiredNumberOfEdges+=i;
+//		}
+//		generateMinimalConnectedGraph(testSize);
 		generateGraph(testSize,testSize*2);
-		//generateMaximumGraph(testSize);
+//		generateMaximumGraph(testSize);
 		return true;
 	}
 	
 	bool run (void) {
-//		std::cout << graph->DFS();
 		graph->BFS();
 		return true;
 	}
@@ -322,6 +327,7 @@ class test_graph_DFS : public IRunnable {
 private:
 
 	IGraph * graph;
+	int numberOfV;
 
 	/*!
 	 * \brief Metoda ustawia punkt startowy generatora
@@ -343,6 +349,7 @@ private:
 	 *\brief Dodaje określoną ilość wierzchołków do grafu
 	 */
 	 void addElementsOfGraph(int numberOfVertices) {
+	 	numberOfV = numberOfVertices;
 	 	for (int i=0; i <numberOfVertices;i++) {
 	 		graph->insertVertex();
 	 	}
@@ -370,6 +377,7 @@ private:
 	 	generateMinimalConnectedGraph(numberOfVertices);
 	 	
 	 	int needMore = numberOfEdg - graph->numberOfEdges();
+	 	if (needMore <= 0) return;
 	 	
 	 	for (int i = 0; i < needMore; i++) {
 	 		int one = rand()%(numberOfVertices-1);
@@ -407,14 +415,18 @@ private:
 	 
 public:
 	bool prepare(int testSize) {
+//		int requiredNumberOfEdges=0;
+//	 	for(int i = numberOfV-1; i>0;i--) {
+//			requiredNumberOfEdges+=i;
+//		}
 		generateGraph(testSize,testSize*2);
-		//generateMaximumGraph(testSize);
+//		generateMinimalConnectedGraph(testSize);
+//		generateMaximumGraph(testSize);
 		return true;
 	}
 	
 	bool run (void) {
 		graph->DFS();
-//		std::cout<< graph->BFS();
 		return true;
 	}
 };
