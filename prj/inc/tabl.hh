@@ -93,12 +93,19 @@ public:
 	 */
 	 virtual void bubblesort() = 0;
 	 
-	 /*!
+	/*!
 	 *\brief znajduje element w tablicy
 	 *
 	 *\retval true gdy element został znaleziony
 	 */
 	 virtual bool search(T) = 0;
+	 
+	 /*!
+	 *\brief znajduje element w tablicy
+	 *
+	 *\retval indeks znalezionego elementu
+	 */
+	 virtual int searchIndex(T) = 0;
 	 
 	 //Jest OK
 	 friend std::ostream & operator << (std::ostream & output, /*const - BEZ TEGO DZIAŁA*/  Itabn<T> * to) {
@@ -270,6 +277,13 @@ public:
 	 *\retval true gdy element został znaleziony
 	 */
 	 virtual bool search(T);
+	 
+	/*!
+	 *\brief znajduje element w tablicy
+	 *
+	 *\retval index indeks znalezionego elementu
+	 */
+	 virtual int searchIndex(T);
 	
 
 	
@@ -331,6 +345,16 @@ bool tabn<T>::search (T elem) {
 		if (tab[i] == elem) return true;
 	}
 	return false;
+}
+
+template <class T>
+int tabn<T>::searchIndex (T elem) {
+	if (!search(elem)) throw CriticalException("ElementNotFoundCannotShowIndex");
+	else {
+		for(int i=0; i<numberOfElems; i++) {
+			if (tab[i] == elem) return i;
+	}
+	return -1;
 }
 
 template <class T>
