@@ -24,6 +24,7 @@ class nodeRB {
 public:
 	T key;
 	Colour colour;
+	int balanceFactor;
 	class nodeRB<T> * left;
 	class nodeRB<T> * right;
 	class nodeRB<T> * up;
@@ -39,6 +40,7 @@ public:
 		left = addLeft;
 		right = addRight;
 		colour = col;
+		balanceFactor = 0;
 	}
 	
 	T getKey (void) {
@@ -144,7 +146,12 @@ public:
 				output << "ROOT\n";
 			}
 			else {
-				output << "C: " << to->up->key << " " << to->up->colour;
+				if (to->up->left == to)
+					output << "LC: " << to->up->key << " " << to->up->colour;
+				else if (to->up->right == to)
+					output << "RC: " << to->up->key << " " << to->up->colour;
+				else
+					output << "UC: " << to->up->key << " " << to->up->colour;
 			}
 			return output;
 	}
@@ -175,6 +182,9 @@ public:
 	virtual void insert (T, nodeRB<T> *) =0;
 	virtual bool search (T) = 0;
 	virtual ~ITreeRB () {};
+	virtual void leftRot (nodeRB<T> *) = 0;
+	virtual void rightRot (nodeRB<T>* ) = 0;
+	virtual nodeRB<T> * retRoot (void) = 0;
 	
 	friend std::ostream & operator << (std::ostream & output, ITreeRB * to) {
 		to->print(output);
@@ -191,7 +201,7 @@ class TreeRB : public ITreeRB<T> {
 
 private: 
 	nodeRB<T> * root;
-	
+private:
 	void print (std::ostream & output) {
 		print (output, root);
 	}
@@ -212,15 +222,35 @@ private:
 				if (node->right != NULL) {
 					print(output,node->right);
 				}
-				output << '\n';
+				//output << '\n';
 			}
 		}
 	}
 	
+	int height (nodeRB<T> * nd) {
+		if (nd == NULL) return 0;
+		else {
+			int leftdepth = height(nd->left);
+			int rightdepth = height(nd->right);
+			if (leftdepth>rightdepth) return leftdepth + 1;
+			else return rightdepth + 1;
+		}
+	}
+	
+	void updateBalanceFactor(nodeRB<T> * nd) {
+		nd->balanceFactor = height(nd->left) - height(nd->right);
+	}
+	
+public:
+	
+	virtual nodeRB<T> * retRoot (void) {
+		return root;
+	}
+
 	/*!
 	 *\brief Obraca wybrane poddrzewo w lewo
 	 */
-	void leftRot (nodeRB<T> * nd) {
+	virtual void leftRot (nodeRB<T> * nd) {
 		if (nd->right !=NULL) { //Warunek rotacji
 			nodeRB<T> * y = nd->right;
 			
@@ -253,7 +283,8 @@ private:
 		}
 	}
 	
-	void rightRot (nodeRB<T> * nd) {
+	virtual void rightRot (nodeRB<T> * nd) {
+
 		if (nd->left != NULL) { //Warunek rotacji
 			nodeRB <T> * y = nd->left;
 			
@@ -321,22 +352,134 @@ public:
 			root = new nodeRB<T>(element,black);
 			return;
 		}
-		
-		//Wstawienie
-		if (node->left == NULL && element < node->key) {
-			node->setLeft(new nodeRB<T>(element,red,node));
+		else {
+			//Wstawienie
+			if (node->left == NULL && element < node->key) {
+				node->setLeft(new nodeRB<T>(element,red,node));
+				updateBalanceFactor(node);
+				balance(node);
+				//recolour(node);
+			}
+			else if (node->right == NULL && element > node->key) {
+				node->setRight(new nodeRB<T>(element,red,node));
+				updateBalanceFactor(node);
+				balance(node);
+				//recolour(node);
+			}
+			else if (node->left != NULL && element < node->key) {
+				insert(element, node->left);
+			}
+			else if (node->right != NULL && element > node->key) {
+				insert(element, node->right);
+			}
+			else return; //następny element do wpisania - prawdopodobnie już mamy taki w drzewie
 		}
-		else if (node->right == NULL && element > node->key) {
-			node->setRight(new nodeRB<T>(element,red,node));
-		}
-		else if (node->left != NULL && element < node->key) {
-			insert(element, node->left);
-		}
-		else if (node->right != NULL && element > node->key) {
-			insert(element, node->right);
-		}
-		else return; //następny element do wpisania - prawdopodobnie już mamy taki w drzewie
 	}
+	
+private:
+
+	void balance(nodeRB<T> *node) {
+		nodeRB<T> * par = node->up;
+		if (par==NULL) return;
+		do {
+			std::cout << "Petla balance\n";
+			if (par->left == node) {
+				if(par->balanceFactor==1){
+					if(node->balanceFactor==-1){
+						leftRot(node);
+					}
+					rightRot(par);
+					break;
+				}
+				if(par->balanceFactor==-1) {
+					par->balanceFactor=0;
+					break;
+				}
+				par->balanceFactor=1;
+			}
+			else {
+				if (par->balanceFactor==-1) {
+					if(node->balanceFactor==1) {
+						rightRot(node);
+					}
+					leftRot(par);
+					break;
+				}
+				if (par->balanceFactor==1) {
+					par->balanceFactor=0;
+					break;
+				}
+				par->balanceFactor=-1;
+			}
+			node = par;
+			par = par->up;
+		} while (par != NULL);
+	}
+	
+	void recolour(nodeRB<T> *node) {
+		if (node->up == NULL) {
+			//node jest rootem
+			node->colour = black;
+			return;
+		}
+		else if (node->up->up==NULL) {
+			//node jest synem roota - wstawione jako czerwone, nie trzeba nic robić
+			return;
+		}
+		else {
+			while (node->up->colour == black) {
+			if (node->up->up==NULL) return;
+				std::cout << "Petla recolour\n";
+				//Pozostałe przypadki - przywrócenie właściwości drzewa może być wymagane
+				//Można wykonać operacje, ponieważ mamy rodzica rodzica
+				if (node->up->up->left==node->up) {
+					//Jeśli rodzic aktualnego węzła jest lewym synem swojego rodzica
+					if (node->up->up->right->getColour()==red){
+						//Jeśli drugi syn dziadka węzła jest czerwony
+						node->up->colour = black;
+						node->up->up->right->colour=black;
+						node=node->up->up;
+						node->colour = red;
+					}
+					else if (node->up->up->right->getColour()==black && node->up->right==node) {
+						//Jeśli drugi syn dziadka węzła jest czarny, a węzeł jest prawym synem swojego ojca
+						node=node->up;
+						leftRot(node);
+					}
+					//else if (node->up->up->right->getColour()==black && node->up->left==node) {
+						//Jeśli drugi syn dziadka węzła jest czarny, a węzeł jest lewym synem swojego ojca
+						node->up->colour=black;
+						node->up->up->colour = red;
+						rightRot(node->up->up);
+					//}
+				}
+				else { //if (node->up->up->right==node->up)
+					//Jeśli rodzic aktualnego węzła jest prawym synem swojego rodzica
+					if (node->up->up->left->getColour()==red){
+						//Jeśli drugi syn dziadka węzła jest czerwony
+						node->up->colour = black;
+						node->up->up->left->colour=black;
+						node=node->up->up;
+						node->colour = red;
+					}
+					else if (node->up->up->left->getColour()==black && node->up->left==node) {
+						//Jeśli drugi syn dziadka węzła jest czarny, a węzeł jest lewym synem swojego ojca
+						node=node->up;
+						rightRot(node);
+					}
+					//else if (node->up->up->left->getColour()==black && node->up->right==node) {
+						//Jeśli drugi syn dziadka węzła jest czarny, a węzeł jest prawym synem swojego ojca
+						node->up->colour=black;
+						node->up->up->colour = red;
+						leftRot(node->up->up);
+					//}
+				}
+			}
+		}
+		
+	}
+
+public:
 	
 	virtual bool search (T k) {
 		bool found = false;

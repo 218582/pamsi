@@ -8,76 +8,76 @@ using namespace std;
 #include "../inc/main.hh"
 //#include <numeric>
 
+//-BFS i DFS TEST---------------------------------------------------------------
+//int main(void) {
+//	int liczbaElementow[] = {10, 100, 1000, 10000, 100000, 1000000, 10000000,100000000};
+//	
+//	double timeDFS;
+//	double timeBFS;
+//	
+//	ofstream WynikiDFS;
+//	WynikiDFS.open("WynikiDFS",std::ios::app);
+//	if(!WynikiDFS.is_open()){
+//    	cerr << "Nie otwarty plik!"<< endl;
+//   	 return 1;
+//	}
+//	
+//	ofstream WynikiBFS;
+//	WynikiBFS.open("WynikiBFS",std::ios::app);
+//	if(!WynikiBFS.is_open()){
+//    	cerr << "Nie otwarty plik!"<< endl;
+//   	 return 1;
+//	}
 
-int main(void) {
-	int liczbaElementow[] = {10, 100, 1000, 10000, 100000, 1000000, 10000000,100000000};
-	
-	double timeDFS;
-	double timeBFS;
-	
-	ofstream WynikiDFS;
-	WynikiDFS.open("WynikiDFS",std::ios::app);
-	if(!WynikiDFS.is_open()){
-    	cerr << "Nie otwarty plik!"<< endl;
-   	 return 1;
-	}
-	
-	ofstream WynikiBFS;
-	WynikiBFS.open("WynikiBFS",std::ios::app);
-	if(!WynikiBFS.is_open()){
-    	cerr << "Nie otwarty plik!"<< endl;
-   	 return 1;
-	}
-
-	try{		
-		WynikiDFS << "#PrzeszukiwanieDFS" << endl;
-		WynikiBFS << "#PrzeszukiwanieBFS" << endl;
-		for (int i=0; i<6; i++) { //ilość testów
-			for(int j=0; j<10; j++) {
-				{
-				IStoper * stoper = new Stoper;
-				test_graph_DFS dfstest;
-				dfstest.prepare(liczbaElementow[i]);
-				stoper->start();
-				dfstest.run();
-				stoper->stop();
-				timeDFS = timeDFS+(stoper->getElapsedTimeMs());
-				}
-				{
-				IStoper * stoper = new Stoper;
-				test_graph_BFS bfstest;
-				bfstest.prepare(liczbaElementow[i]);
-				stoper->start();
-				bfstest.run();
-				stoper->stop();
-				timeBFS = timeBFS+(stoper->getElapsedTimeMs());
-				}
-			}
-			timeBFS = timeBFS / 10;
-			timeDFS = timeDFS / 10;
-			WynikiDFS << liczbaElementow[i] << " " << timeDFS << endl;
-			WynikiBFS << liczbaElementow[i] << " " << timeBFS << endl;
-			timeBFS = 0;
-			timeDFS = 0;
-			cout << "Testy dla " << liczbaElementow[i] << " zakonczone." << endl;
-		}
-		
-	}
-	catch (CriticalException & except) {
-		cout << "Critical Exception: " << except << endl;
-	}
-	catch (ContinueException & except) {
-		cout << "Exception: " << except << endl;
-	}
-	catch (ExceptionBase & base) {
-		cout << "Exception" << base << endl;
-	}
-	catch (...) {
-		cout << "Totally unknown!" << endl;
-	}
-	
-}
-
+//	try{		
+//		WynikiDFS << "#PrzeszukiwanieDFS" << endl;
+//		WynikiBFS << "#PrzeszukiwanieBFS" << endl;
+//		for (int i=0; i<6; i++) { //ilość testów
+//			for(int j=0; j<10; j++) {
+//				{
+//				IStoper * stoper = new Stoper;
+//				test_graph_DFS dfstest;
+//				dfstest.prepare(liczbaElementow[i]);
+//				stoper->start();
+//				dfstest.run();
+//				stoper->stop();
+//				timeDFS = timeDFS+(stoper->getElapsedTimeMs());
+//				}
+//				{
+//				IStoper * stoper = new Stoper;
+//				test_graph_BFS bfstest;
+//				bfstest.prepare(liczbaElementow[i]);
+//				stoper->start();
+//				bfstest.run();
+//				stoper->stop();
+//				timeBFS = timeBFS+(stoper->getElapsedTimeMs());
+//				}
+//			}
+//			timeBFS = timeBFS / 10;
+//			timeDFS = timeDFS / 10;
+//			WynikiDFS << liczbaElementow[i] << " " << timeDFS << endl;
+//			WynikiBFS << liczbaElementow[i] << " " << timeBFS << endl;
+//			timeBFS = 0;
+//			timeDFS = 0;
+//			cout << "Testy dla " << liczbaElementow[i] << " zakonczone." << endl;
+//		}
+//		
+//	}
+//	catch (CriticalException & except) {
+//		cout << "Critical Exception: " << except << endl;
+//	}
+//	catch (ContinueException & except) {
+//		cout << "Exception: " << except << endl;
+//	}
+//	catch (ExceptionBase & base) {
+//		cout << "Exception" << base << endl;
+//	}
+//	catch (...) {
+//		cout << "Totally unknown!" << endl;
+//	}
+//	
+//}
+//-BFS i DFS TEST KONIEC--------------------------------------------------------
 
 
 //IGraph * grph = new Graph;
@@ -160,33 +160,33 @@ int main(void) {
 
 
 
-
-//	ITreeRB<int> * tree = new TreeRB<int>;
-//	try {
-//		tree->insert(4);
-//		tree->insert(7);
-//		tree->insert(-1);
-//		tree->insert(-5);
-//		tree->insert(3);
-//		tree->insert(6);
-//		tree->insert(10);
-//		//cout << tree;
-//		if(tree->search(3)) cout << "FOUND\n";
-//	}
-//	catch (CriticalException & except) {
-//		cout << "Critical Exception: " << except << endl;
-//	}
-//	catch (ContinueException & except) {
-//		cout << "Exception: " << except << endl;
-//	}
-//	catch (ExceptionBase & base) {
-//		cout << "Exception" << base << endl;
-//	}
-//	catch (...) {
-//		cout << "Totally unknown!" << endl;
-//	}
-//	
-//}
+int main (void) { 
+	ITreeRB<int> * tree = new TreeRB<int>;
+	try {
+		tree->insert(2);
+		tree->insert(1);
+		tree->insert(4);
+		tree->insert(3);
+		tree->insert(5);
+		tree->insert(6);
+		tree->insert(8);
+		cout << tree;
+		if(tree->search(3)) cout << "FOUND\n";
+	}
+	catch (CriticalException & except) {
+		cout << "Critical Exception: " << except << endl;
+	}
+	catch (ContinueException & except) {
+		cout << "Exception: " << except << endl;
+	}
+	catch (ExceptionBase & base) {
+		cout << "Exception" << base << endl;
+	}
+	catch (...) {
+		cout << "Totally unknown!" << endl;
+	}
+	
+}
 //	ITreeRB<int> * tree = new TreeRB<int>; 
 //	try {
 //		nodeRB<int> one (5);
