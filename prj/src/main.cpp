@@ -170,6 +170,7 @@ int main (void) {
 		tree->insert(5);
 		tree->insert(6);
 		tree->insert(8);
+		tree->insert(9);
 		cout << tree;
 		if(tree->search(3)) cout << "FOUND\n";
 	}

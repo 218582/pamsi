@@ -197,7 +197,9 @@ public:
 				}
 			}
 			if (temp->nOE()==0) {
-				throw ContinueException("ElementNotFound");
+				Itabn<T2> * ret = NULL;
+				return ret;
+				//throw ContinueException("ElementNotFound");
 			}
 		}
 		catch (...) {

@@ -107,6 +107,14 @@ public:
 	 */
 	 virtual int searchIndex(T) = 0;
 	 
+	 /*!
+	 *\brief znajduje element w tablicy
+	 *
+	 *\retval indeks znalezionego elementu
+	 */
+	 virtual T searchObject(T) = 0;
+	 
+	 
 	 //Jest OK
 	 friend std::ostream & operator << (std::ostream & output, /*const - BEZ TEGO DZIAŁA*/  Itabn<T> * to) {
 		for (int i=0; i<(to->nOE());i++) {
@@ -284,6 +292,13 @@ public:
 	 *\retval index indeks znalezionego elementu
 	 */
 	 virtual int searchIndex(T);
+	 
+	 /*!
+	 *\brief znajduje element w tablicy
+	 *
+	 *\retval znaleziony element
+	 */
+	 virtual T searchObject(T);
 	
 
 	
@@ -353,9 +368,16 @@ int tabn<T>::searchIndex (T elem) {
 	else {
 		for(int i=0; i<numberOfElems; i++) {
 			if (tab[i] == elem) return i;
+		}
 	}
 	return -1;
 }
+
+template <class T>
+T tabn<T>::searchObject (T obj) {
+	return tab[searchIndex(obj)];
+}
+
 
 template <class T>
 void tabn<T>::add (T element) {
