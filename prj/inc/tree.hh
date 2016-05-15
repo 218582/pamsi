@@ -24,7 +24,7 @@ class nodeRB {
 public:
 	T key;
 	Colour colour;
-	int balanceFactor;
+	//int balanceFactor;
 	class nodeRB<T> * left;
 	class nodeRB<T> * right;
 	class nodeRB<T> * up;
@@ -40,7 +40,7 @@ public:
 		left = addLeft;
 		right = addRight;
 		colour = col;
-		balanceFactor = 0;
+		//balanceFactor = 0;
 	}
 	
 	T getKey (void) {
@@ -141,11 +141,11 @@ public:
 	}
 	
 	friend std::ostream & operator << (std::ostream & output, const nodeRB<T> * to) {
-			output <<  to->key << " " << to->colour << " ";
 			if (to->up == NULL) {
-				output << "ROOT\n";
+				output << "\n\n" << to->key << " " << to->colour << " " << "ROOT\n";
 			}
 			else {
+				output << to->key << " " << to->colour << " ";
 				if (to->up->left == to)
 					output << "LC: " << to->up->key << " " << to->up->colour;
 				else if (to->up->right == to)
@@ -208,7 +208,7 @@ private:
 	
 	//Wyświetlanie elementów drzewa
 	void print (std::ostream & output, nodeRB<T> * node) {
-		if (root->left==NULL && root->right==NULL && root->up==NULL) {
+		if (root==NULL) {
 			output << "Empty tree\n";
 			return;
 		}
@@ -237,13 +237,7 @@ private:
 		}
 	}
 	
-	void updateBalanceFactor(nodeRB<T> * nd) {
-		nd->balanceFactor = height(nd->left) - height(nd->right);
-		if (nd->left!=NULL)
-			updateBalanceFactor(nd->left);
-		if (nd->right!=NULL)
-			updateBalanceFactor(nd->right);
-	}
+f
 	
 public:
 	
@@ -253,6 +247,7 @@ public:
 
 	/*!
 	 *\brief Obraca wybrane poddrzewo w lewo
+	 *\param in element najstarszy do obrotu
 	 */
 	virtual void leftRot (nodeRB<T> * nd) {
 		if (nd->right !=NULL) { //Warunek rotacji
@@ -277,11 +272,7 @@ public:
 			}
 			else {
 				nd->right=NULL;
-			}			
-//			//Ustalenie prawego syna nd jako roota poddrzewa obróconego
-//			if (nd->up!=NULL) {
-//				y->up = nd->up;
-//			}
+			}
 			
 			//Podpięcie elementu nd jako dziecka obecnego roota poddrzewa
 			y->left = nd;
@@ -289,10 +280,14 @@ public:
 		}
 	}
 	
+	/*!
+	 *\brief Obraca wybrane poddrzewo w prawo
+	 *\param in element najstarszy do obrotu
+	 */
 	virtual void rightRot (nodeRB<T> * nd) {
 
-		if (nd->right !=NULL) { //Warunek rotacji
-			nodeRB<T> * y = nd->right;
+		if (nd->left !=NULL) { //Warunek rotacji
+			nodeRB<T> * y = nd->left;
 			
 			//Edycja wskaźnika rodzica poddrzewa obracanego
 			if (nd->up == NULL) { 
@@ -301,8 +296,8 @@ public:
 			}
 			else {
 				nodeRB<T> * par = nd->up;
-				if(nd==nd->up->left) nd->up->left = y;
-				else nd->up->right = y;
+				if(nd==nd->up->right) nd->up->right = y;
+				else nd->up->left = y;
 				y->up = par;
 			}
 			
@@ -313,11 +308,7 @@ public:
 			}
 			else {
 				nd->left=NULL;
-			}			
-//			//Ustalenie prawego syna nd jako roota poddrzewa obróconego
-//			if (nd->up!=NULL) {
-//				y->up = nd->up;
-//			}
+			}
 			
 			//Podpięcie elementu nd jako dziecka obecnego roota poddrzewa
 			y->right = nd;
@@ -350,7 +341,6 @@ public:
 	
 	
 	virtual void insert (T element, nodeRB<T> * node) {
-
 		//Jeśli wstawiamy pierwszy element do drzewa
 		if (node==NULL) {
 			root = new nodeRB<T>(element,black);
@@ -360,15 +350,13 @@ public:
 			//Wstawienie
 			if (node->left == NULL && element < node->key) {
 				node->setLeft(new nodeRB<T>(element,red,node));
-				updateBalanceFactor(root);
-				balance(node);
-				recolour(node);
+				//balance(node);
+//				recolour(node);
 			}
 			else if (node->right == NULL && element > node->key) {
 				node->setRight(new nodeRB<T>(element,red,node));
-				updateBalanceFactor(root);
-				balance(node);
-				recolour(node);
+				//balance(node);
+//				recolour(node);
 			}
 			else if (node->left != NULL && element < node->key) {
 				insert(element, node->left);
@@ -381,42 +369,106 @@ public:
 	}
 	
 private:
-	//z balanceFactor - ujemny znaczy przesunięty na prawo
-	void balance(nodeRB<T> *node) {
-		nodeRB<T> * par = node->up;
-		if (par==NULL) return;
-		//std::cout << "Petla balance\n";
-		if (par->left == node) {
-			if(par->balanceFactor==1){
-				if(node->balanceFactor==-1){
-					leftRot(node);
-				}
-				rightRot(par);
-				return;
-			}
-			if(par->balanceFactor==-1) {
-				par->balanceFactor=0;
-				return;
-			}
-			par->balanceFactor=1;
-		}
-		else { //par->right == node
-			if (par->balanceFactor==-1) {
-				if(node->balanceFactor==1) {
-					rightRot(node);
-				}
-				leftRot(par);
-				return;
-			}
-			if (par->balanceFactor==1) {
-				par->balanceFactor=0;
-				return;
-			}
-			par->balanceFactor=-1;
-		}
-		balance(node->up);
-	}
-	
+//	//z balanceFactor - ujemny znaczy przesunięty na prawo
+//	//param in - ostatnio dodany element
+//	void balance(nodeRB<T> *node) {
+//		updateBalanceFactor(node);
+////		nodeRB<T> * P;
+////		nodeRB<T> * N;
+////		do {
+////			if (node->up==NULL) return;
+////			if (node->up->up==NULL) return;
+
+////		
+////			P = node->up->up;
+////			N = node->up;
+////			if (N==P->left) {
+////				if (P->balanceFactor == -1) {
+////					if (N->balanceFactor == 1) {
+////						leftRot(N->up);
+////					}
+////					rightRot(P->up);
+////					break;
+////				}
+////				if (P->balanceFactor == 1) {
+////					P->balanceFactor = 0;
+////					break;
+////				}
+////				P->balanceFactor = -1;
+////			}
+////			else {
+////				if (P->balanceFactor == 1) {
+////					if (N->balanceFactor == -1) {
+////						rightRot(N->up);
+////					}
+////					leftRot(P->up);
+////					break;
+////				}
+////				if (P->balanceFactor == -1) {
+////					P->balanceFactor = 0;
+////					break;
+////				}
+////				P->balanceFactor = 1;
+////			}
+////			N=P;
+////			P = P->up;
+////		} while (P!=NULL);
+////	}
+////	
+//			
+//			nodeRB<T> * grandparent = node->up->up;
+//			nodeRB<T> * parent = node->up;
+//			if (grandparent->balanceFactor>1) {
+//				if (parent->balanceFactor<=0) {
+//					leftRot(parent);
+//				}
+//				rightRot(grandparent);
+//			}
+//			else if (grandparent->balanceFactor<1) {
+//				if (parent->balanceFactor>=0) {
+//					rightRot(parent);
+//				}
+//				leftRot(grandparent);
+//			}
+//		}
+////	}
+//			
+////	do {
+////		if (node==NULL) return;
+////		nodeRB<T> * par = node->up;
+////		if (par==NULL) return;
+////		//std::cout << "Petla balance\n";
+////		if (par->left == node) {
+////			if(par->balanceFactor==1){
+////				if(node->balanceFactor==-1){
+////					leftRot(node);
+////				}
+////				rightRot(par);
+////				return;
+////			}
+////			if(par->balanceFactor==-1) {
+////				par->balanceFactor=0;
+////				return;
+////			}
+////			par->balanceFactor=1;
+////		}
+////		else { //par->right == node
+////			if (par->balanceFactor==-1) {
+////				if(node->balanceFactor==1) {
+////					rightRot(node);
+////				}
+////				leftRot(par);
+////				return;
+////			}
+////			if (par->balanceFactor==1) {
+////				par->balanceFactor=0;
+////				return;
+////			}
+////			par->balanceFactor=-1;
+////		}
+////		balance(node->up);
+////	}
+//	
 	void recolour(nodeRB<T> *node) {
 		if (node->up == NULL) {
 			//node jest rootem
@@ -477,7 +529,6 @@ private:
 				}
 			}
 		}
-		
 	}
 
 public:

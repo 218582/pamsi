@@ -163,14 +163,19 @@ using namespace std;
 int main (void) { 
 	ITreeRB<int> * tree = new TreeRB<int>;
 	try {
-		tree->insert(2);
 		tree->insert(1);
+		cout << tree;
+		tree->insert(2);
+		cout << tree;
 		tree->insert(4);
+		cout << tree;
 		tree->insert(3);
+		cout << tree;
 		tree->insert(5);
+		cout << tree;
 		tree->insert(6);
-		tree->insert(8);
-		tree->insert(9);
+		cout << tree;
+		tree->insert(10);
 		cout << tree;
 		if(tree->search(3)) cout << "FOUND\n";
 	}

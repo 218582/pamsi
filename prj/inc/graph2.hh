@@ -304,7 +304,7 @@
 //	  * znaczne wydłużenie czasu generowania grafu - możliwy jest długi czas oczekiwania na wylosowanie 
 //	  * nowej krawędzi
 //	  */
-//	 void generateMaximumGraph (int numberOfVertices) {
+//	void generateMaximumGraph (int numberOfVertices) {
 //	 	addElementsOfGraph(numberOfVertices);
 //	 	//Obliczanie ilości krawędzi
 //	 	int requiredNumberOfEdges=0;
@@ -318,7 +318,7 @@
 //				graph->insertEdge(i,j,rand()%maxWeight);	
 //			}
 //		}
-//	 }
+//	}
 //	 
 //	 bool branchAndBoundLoopSearch (int now, int end) {
 //	 	
