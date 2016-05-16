@@ -31,7 +31,7 @@ public:
 
 public:
 	/*!
-	 *\brief brief_desc
+	 *\brief Konstruktor węzła
 	 */
 	 
 	nodeRB (T addKey, Colour col = red, nodeRB<T> * addUp = NULL, nodeRB<T> * addLeft = NULL, nodeRB<T> * addRight = NULL) {
@@ -43,10 +43,17 @@ public:
 		//balanceFactor = 0;
 	}
 	
+	/*!
+	 *\brief Zwraca klucz węzła
+	 */
 	T getKey (void) {
 		return key;
 	}
 	
+	/*!
+	 *\brief Zwraca kolor węzła
+	 *\retval black gdy liść
+	 */
 	Colour getColour (void) {
 		if (this==NULL) {
 			return black;
@@ -54,19 +61,30 @@ public:
 		else return colour;
 	}
 	
-
+	/*!
+	 *\brief Zwraca wskaźnik na lewe dziecko
+	 */
 	nodeRB<T> * getLeft (void) {
 		return left;
 	}
 	
+	/*!
+	 *\brief Zwraca wskaźnik na prawe dziecko
+	 */
 	nodeRB<T> * getRight (void) {
 		return right;
 	}
 	
+	/*!
+	 *\brief Zwraca wskaźnik na rodzica
+	 */
 	nodeRB<T> * getParent (void) {
 		return up;
 	}
 	
+	/*!
+	 *\brief Zwraca klucz lewego dziecka
+	 */
 	T getLeftKey (void) {
 		if (left != NULL)
 			return left->getKey();
@@ -74,6 +92,9 @@ public:
 			return 0;
 	}
 	
+	/*!
+	 *\brief Zwraca klucz prawego dziecka
+	 */
 	T getRightKey (void) {
 		if (right != NULL)
 			return right->getKey();
@@ -81,6 +102,9 @@ public:
 			return 0;	
 	}
 	
+	/*!
+	 *\brief Zwraca klucz rodzica
+	 */
 	T getParentKey (void) {
 		if (up != NULL)
 			return up->getKey();
@@ -88,27 +112,45 @@ public:
 			return 0;
 	}
 	
+	/*!
+	 *\brief Ustawia klucz
+	 */
 	void setKey (T keyToSet) {
 		key = keyToSet;
 	}
 	
+	/*!
+	 *\brief Ustawia kolor
+	 */
 	void setColour (Colour colourToSet) {
 		if (this==NULL) return;
 		colour = colourToSet;
 	}
 	
+	/*!
+	 *\brief Ustawia wskaźnik na lewe dziecko
+	 */
 	void setLeft (nodeRB<T> * leftDescendant) {
 		left = leftDescendant;
 	}
 	
+	/*!
+	 *\brief Ustawia wskaźnik na prawe dziecko
+	 */
 	void setRight (nodeRB<T> * rightDescendant) {
 		right = rightDescendant;
 	}
 	
+	/*!
+	 *\brief Ustawia wskaźnik na rodzica
+	 */
 	void setParent (nodeRB<T> * up) {
 		up = up;
 	}
 	
+	/*!
+	 *\brief Przeciążenie operatora przypisania
+	 */
 	nodeRB<T> & operator = (const nodeRB<T> & read) {
 		key = read.key;
 		colour = read.colour;
@@ -118,32 +160,50 @@ public:
 		return * this;
 	}
 	
+	/*!
+	 *\brief Przeciążenie operatora porównania <
+	 */
 	friend bool operator < (nodeRB<T> one, nodeRB<T> two) {
 		if (one.key < two.key) return true;
 		else return false;
 	}
 	
+	/*!
+	 *\brief Przeciążenie operatora porównania >
+	 */
 	friend bool operator > (nodeRB<T> one, nodeRB<T> two) {
 		if (one.key > two.key) return true;
 		else return false;
 	}
 	
+	/*!
+	 *\brief Przeciążenie operatora porównania <=
+	 */
 	friend bool operator <= (nodeRB<T> one, nodeRB<T> two) {
 		if (one.empty || two.empty) return false;
 		else if (one.key <= two.key) return true;
 		else return false;
 	}
 	
+	/*!
+	 *\brief Przeciążenie operatora porównania >=
+	 */
 	friend bool operator >= (nodeRB<T> one, nodeRB<T> two) {
 		if (one.key >= two.key) return true;
 		else return false;
 	}
 	
+	/*!
+	 *\brief Przeciążenie operatora porównania ==
+	 */
 	friend bool operator == (nodeRB<T> one, nodeRB<T> two) {
 		if (one.key == two.key) return true;
 		else return false;
 	}
 	
+	/*!
+	 *\brief Przeciążenie operatora strumienia wyjściowego
+	 */
 	friend std::ostream & operator << (std::ostream & output, const nodeRB<T> * to) {
 			if (to->up == NULL) {
 				output << "\n\n" << to->key << " " << to->colour << " " << "ROOT\n";
@@ -160,17 +220,6 @@ public:
 			return output;
 	}
 	
-	friend std::istream & operator >> (std::istream & input, const nodeRB<T> * to) {
-		if(input.eof()) {
-			input.setstate(std::ios::eofbit);
-		}
-		else {
-			T elem;
-			input >> elem;
-			to.key = elem;
-		}
-		return input;
-	}
 };
 
 
@@ -206,11 +255,16 @@ class TreeRB : public ITreeRB<T> {
 private: 
 	nodeRB<T> * root;
 private:
+	/*!
+	 *\brief Wyświetlanie drzewa
+	 */
 	void print (std::ostream & output) {
 		print (output, root);
 	}
 	
-	//Wyświetlanie elementów drzewa
+	/*!
+	 *\brief Wyświetlanie drzewa
+	 */
 	void print (std::ostream & output, nodeRB<T> * node) {
 		if (root==NULL) {
 			output << "Empty tree\n";
@@ -231,20 +285,12 @@ private:
 		}
 	}
 	
-	int height (nodeRB<T> * nd) {
-		if (nd == NULL) return 0;
-		else {
-			int leftdepth = height(nd->left);
-			int rightdepth = height(nd->right);
-			if (leftdepth>rightdepth) return leftdepth + 1;
-			else return rightdepth + 1;
-		}
-	}
-	
-
-	
+		
 public:
 	
+	/*!
+	 *\brief Zwraca roota drzewa
+	 */
 	virtual nodeRB<T> * retRoot (void) {
 		return root;
 	}
@@ -346,7 +392,9 @@ public:
 		insert(element, root);
 	}
 	
-	
+	/*!
+	 *\brief Wstawia element jako potomka danego elementu
+	 */
 	virtual void insert (T element, nodeRB<T> * node) {
 		//Jeśli wstawiamy pierwszy element do drzewa
 		if (node==NULL) {
@@ -377,6 +425,9 @@ public:
 	
 private:
 
+	/*!
+	 *\brief Koloruje i balansuje poddrzewo
+	 */
 	void recolour(nodeRB<T> *node) {
 		while (node->up->getColour() == red) {
 			if (node->up == node->up->up->left) {
@@ -419,50 +470,11 @@ private:
 		root->setColour(black);
 	}
 
-//		nodeRB<T> * temp;
-//		while ((node!=root) && (node->up->getColour()==red)) {
-//			if (node->up == node->up->up->left) {
-//				temp = node->up->up->right;
-//					if (temp->getColour() == red) {
-//						node->up->setColour(black);
-//						temp->setColour(black);
-//						node->up->up->setColour(black);
-//						node = node->up->up;
-//					}
-//				else {
-//					if (node == node->up->right) {
-//						node = node->up;
-//						leftRot(node);
-//					}
-//					node->up->setColour(black);
-//					node->up->up->setColour(red);
-//					rightRot(node->up->up);
-//				}
-//			}
-//			else {
-//				temp = node->up->up->left;
-//				if (temp->getColour()==red) {
-//					node->up->setColour(black);
-//					temp->setColour(black);
-//					node->up->up->setColour(black);
-//					node = node->up->up;
-//				}
-//				else {
-//					if (node == node->up->left) {
-//						node = node->up;
-//						rightRot(node);
-//					}
-//					node->up->setColour(black);
-//					node->up->up->setColour(red);
-//					leftRot(node->up->up);
-//				}
-//			}
-//		}
-//		root->setColour(black);
-//	}
-
 public:
 	
+	/*!
+	 *\brief Wyszukuje elementy w drzewie
+	 */
 	virtual bool search (T k) {
 		bool found = false;
 		nodeRB<T> * current = root;
@@ -485,7 +497,9 @@ public:
 	
 };
 
-
+	/*!
+	 *\brief Klasa testująca drzewo czerwono-czarne
+	 */
 class tree_test : public IRunnable {
 private:
 	ITreeRB<int> * testtree;
@@ -509,14 +523,23 @@ private:
 	}
 	
 public:
+	/*!
+	 *\brief Konstruktor
+	 */
 	tree_test () : testtree(new TreeRB<int>) {
 		seedSrand();
 	} 
 	
+	/*!
+	 *\brief Destruktor
+	 */
 	virtual ~tree_test () {
 		delete testtree;
 	}
 	
+	/*!
+	 *\brief Przygotowuje test, wypełniając drzewo
+	 */
 	virtual bool prepare (int sizeOfTest) {
 		counter = sizeOfTest;
 		testsize = sizeOfTest;
@@ -531,6 +554,9 @@ public:
 		return true;
 	}
 	
+	/*!
+	 *\brief Wykonuje test, szukając w drzewie
+	 */
 	virtual bool run () {
 		try {
 			testtree->search(generateRandomDgt());
