@@ -4,9 +4,17 @@
 
 #####Rozwiązania zadań
 
-######Zajęcia 9 - 9 maja
+######Zajęcia 10 - 16 maja
 
 Praca na zajęciach: w toku...
+
+Kod: w toku...
+
+Sprawozdanie: w toku...
+
+######Zajęcia 9 - 9 maja
+
+Praca na zajęciach: [e5ec469](https://github.com/218582/pamsi/tree/e5ec46968fbc7f4ecaed42331292f1d4d1dd3883)
 
 Kod: w toku...
 
@@ -16,7 +24,7 @@ Zadania
 
 - [ ] Algorytm Branch and bound
 - [ ] Pomiar czasu (standardowo) i ilości rozwiniętych ścieżek
-- [ ] Branch and bound with extented list
+- [ ] Branch and bound with extended list
 
 Następne zajęcia - rozpoczęcie projektów
 
