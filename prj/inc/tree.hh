@@ -48,7 +48,10 @@ public:
 	}
 	
 	Colour getColour (void) {
-		return colour;
+		if (this==NULL) {
+			return black;
+		}
+		else return colour;
 	}
 	
 
@@ -90,6 +93,7 @@ public:
 	}
 	
 	void setColour (Colour colourToSet) {
+		if (this==NULL) return;
 		colour = colourToSet;
 	}
 	
@@ -101,8 +105,8 @@ public:
 		right = rightDescendant;
 	}
 	
-	void setParent (nodeRB<T> * parent) {
-		up = parent;
+	void setParent (nodeRB<T> * up) {
+		up = up;
 	}
 	
 	nodeRB<T> & operator = (const nodeRB<T> & read) {
@@ -145,13 +149,13 @@ public:
 				output << "\n\n" << to->key << " " << to->colour << " " << "ROOT\n";
 			}
 			else {
-				output << to->key << " " << to->colour << " ";
+				output << to->key << to->colour << " ";
 				if (to->up->left == to)
-					output << "LC: " << to->up->key << " " << to->up->colour;
+					output << "L: " << to->up->key << to->up->colour;
 				else if (to->up->right == to)
-					output << "RC: " << to->up->key << " " << to->up->colour;
+					output << "R: " << to->up->key << to->up->colour;
 				else
-					output << "UC: " << to->up->key << " " << to->up->colour;
+					output << "U: " << to->up->key << to->up->colour;
 			}
 			return output;
 	}
@@ -237,7 +241,7 @@ private:
 		}
 	}
 	
-f
+
 	
 public:
 	
@@ -250,6 +254,7 @@ public:
 	 *\param in element najstarszy do obrotu
 	 */
 	virtual void leftRot (nodeRB<T> * nd) {
+	
 		if (nd->right !=NULL) { //Warunek rotacji
 			nodeRB<T> * y = nd->right;
 			
@@ -278,6 +283,7 @@ public:
 			y->left = nd;
 			nd->up=y;
 		}
+		else throw CriticalException("CannotRotateLeft");
 	}
 	
 	/*!
@@ -314,6 +320,7 @@ public:
 			y->right = nd;
 			nd->up=y;
 		}
+		else throw CriticalException("CannotRotateRight");
 	}
 	
 public:
@@ -350,13 +357,13 @@ public:
 			//Wstawienie
 			if (node->left == NULL && element < node->key) {
 				node->setLeft(new nodeRB<T>(element,red,node));
-				//balance(node);
-//				recolour(node);
+				node = node->left;
+				recolour(node);
 			}
 			else if (node->right == NULL && element > node->key) {
 				node->setRight(new nodeRB<T>(element,red,node));
-				//balance(node);
-//				recolour(node);
+				node = node->right;
+				recolour(node);
 			}
 			else if (node->left != NULL && element < node->key) {
 				insert(element, node->left);
@@ -369,167 +376,90 @@ public:
 	}
 	
 private:
-//	//z balanceFactor - ujemny znaczy przesunięty na prawo
-//	//param in - ostatnio dodany element
-//	void balance(nodeRB<T> *node) {
-//		updateBalanceFactor(node);
-////		nodeRB<T> * P;
-////		nodeRB<T> * N;
-////		do {
-////			if (node->up==NULL) return;
-////			if (node->up->up==NULL) return;
 
-////		
-////			P = node->up->up;
-////			N = node->up;
-////			if (N==P->left) {
-////				if (P->balanceFactor == -1) {
-////					if (N->balanceFactor == 1) {
-////						leftRot(N->up);
-////					}
-////					rightRot(P->up);
-////					break;
-////				}
-////				if (P->balanceFactor == 1) {
-////					P->balanceFactor = 0;
-////					break;
-////				}
-////				P->balanceFactor = -1;
-////			}
-////			else {
-////				if (P->balanceFactor == 1) {
-////					if (N->balanceFactor == -1) {
-////						rightRot(N->up);
-////					}
-////					leftRot(P->up);
-////					break;
-////				}
-////				if (P->balanceFactor == -1) {
-////					P->balanceFactor = 0;
-////					break;
-////				}
-////				P->balanceFactor = 1;
-////			}
-////			N=P;
-////			P = P->up;
-////		} while (P!=NULL);
-////	}
-////	
-//			
-//			nodeRB<T> * grandparent = node->up->up;
-//			nodeRB<T> * parent = node->up;
-//			if (grandparent->balanceFactor>1) {
-//				if (parent->balanceFactor<=0) {
-//					leftRot(parent);
-//				}
-//				rightRot(grandparent);
-//			}
-//			else if (grandparent->balanceFactor<1) {
-//				if (parent->balanceFactor>=0) {
-//					rightRot(parent);
-//				}
-//				leftRot(grandparent);
-//			}
-//		}
-////	}
-//			
-////	do {
-////		if (node==NULL) return;
-////		nodeRB<T> * par = node->up;
-////		if (par==NULL) return;
-////		//std::cout << "Petla balance\n";
-////		if (par->left == node) {
-////			if(par->balanceFactor==1){
-////				if(node->balanceFactor==-1){
-////					leftRot(node);
-////				}
-////				rightRot(par);
-////				return;
-////			}
-////			if(par->balanceFactor==-1) {
-////				par->balanceFactor=0;
-////				return;
-////			}
-////			par->balanceFactor=1;
-////		}
-////		else { //par->right == node
-////			if (par->balanceFactor==-1) {
-////				if(node->balanceFactor==1) {
-////					rightRot(node);
-////				}
-////				leftRot(par);
-////				return;
-////			}
-////			if (par->balanceFactor==1) {
-////				par->balanceFactor=0;
-////				return;
-////			}
-////			par->balanceFactor=-1;
-////		}
-////		balance(node->up);
-////	}
-//	
 	void recolour(nodeRB<T> *node) {
-		if (node->up == NULL) {
-			//node jest rootem
-			node->colour = black;
-			return;
-		}
-		else if (node->up->up==NULL) {
-			//node jest synem roota - wstawione jako czerwone, nie trzeba nic robić
-			return;
-		}
-		else {
-			while (node->up->colour == black) {
-			if (node->up->up==NULL) return;
-				std::cout << "Petla recolour\n";
-				//Pozostałe przypadki - przywrócenie właściwości drzewa może być wymagane
-				//Można wykonać operacje, ponieważ mamy rodzica rodzica
-				if (node->up->up->left==node->up) {
-					//Jeśli rodzic aktualnego węzła jest lewym synem swojego rodzica
-					if (node->up->up->right->getColour()==red){
-						//Jeśli drugi syn dziadka węzła jest czerwony
-						node->up->colour = black;
-						node->up->up->right->colour=black;
-						node=node->up->up;
-						node->colour = red;
-					}
-					else if (node->up->up->right->getColour()==black && node->up->right==node) {
-						//Jeśli drugi syn dziadka węzła jest czarny, a węzeł jest prawym synem swojego ojca
-						node=node->up;
+		while (node->up->getColour() == red) {
+			if (node->up == node->up->up->left) {
+				nodeRB<T> * y = node->up->up->right;
+				if (y->getColour() == red) {
+					node->up->setColour(black);
+					y->setColour(black);
+					node->up->up->setColour(red);
+					node = node->up->up;
+				}
+				else {
+					if (node == node->up->right) {
+						node = node->up;
 						leftRot(node);
 					}
-					//else if (node->up->up->right->getColour()==black && node->up->left==node) {
-						//Jeśli drugi syn dziadka węzła jest czarny, a węzeł jest lewym synem swojego ojca
-						node->up->colour=black;
-						node->up->up->colour = red;
-						rightRot(node->up->up);
-					//}
+					node->up->setColour(black);
+					node->up->up->setColour(red);
+					rightRot(node->up->up);
 				}
-				else { //if (node->up->up->right==node->up)
-					//Jeśli rodzic aktualnego węzła jest prawym synem swojego rodzica
-					if (node->up->up->left->getColour()==red){
-						//Jeśli drugi syn dziadka węzła jest czerwony
-						node->up->colour = black;
-						node->up->up->left->colour=black;
-						node=node->up->up;
-						node->colour = red;
-					}
-					else if (node->up->up->left->getColour()==black && node->up->left==node) {
-						//Jeśli drugi syn dziadka węzła jest czarny, a węzeł jest lewym synem swojego ojca
-						node=node->up;
+			}
+			else {
+				nodeRB<T> * y = node->up->up->left;
+				if (y->getColour() == red) {
+					node->up->setColour(black);
+					y->setColour(black);
+					node->up->up->setColour(red);
+					node = node->up->up;
+				}
+				else {
+					if (node == node->up->left) {
+						node = node->up;
 						rightRot(node);
 					}
-					//else if (node->up->up->left->getColour()==black && node->up->right==node) {
-						//Jeśli drugi syn dziadka węzła jest czarny, a węzeł jest prawym synem swojego ojca
-						node->up->colour=black;
-						node->up->up->colour = red;
-						leftRot(node->up->up);
-					//}
+					node->up->setColour(black);
+					node->up->up->setColour(red);
+					leftRot(node->up->up);
 				}
 			}
 		}
+		root->setColour(black);
 	}
+
+//		nodeRB<T> * temp;
+//		while ((node!=root) && (node->up->getColour()==red)) {
+//			if (node->up == node->up->up->left) {
+//				temp = node->up->up->right;
+//					if (temp->getColour() == red) {
+//						node->up->setColour(black);
+//						temp->setColour(black);
+//						node->up->up->setColour(black);
+//						node = node->up->up;
+//					}
+//				else {
+//					if (node == node->up->right) {
+//						node = node->up;
+//						leftRot(node);
+//					}
+//					node->up->setColour(black);
+//					node->up->up->setColour(red);
+//					rightRot(node->up->up);
+//				}
+//			}
+//			else {
+//				temp = node->up->up->left;
+//				if (temp->getColour()==red) {
+//					node->up->setColour(black);
+//					temp->setColour(black);
+//					node->up->up->setColour(black);
+//					node = node->up->up;
+//				}
+//				else {
+//					if (node == node->up->left) {
+//						node = node->up;
+//						rightRot(node);
+//					}
+//					node->up->setColour(black);
+//					node->up->up->setColour(red);
+//					leftRot(node->up->up);
+//				}
+//			}
+//		}
+//		root->setColour(black);
+//	}
 
 public:
 	
@@ -570,7 +500,7 @@ private:
 	}
 	
 	/*!
-	 * \brief Metoda generuje liczbę pseudolosową z zakresu 0..9
+	 * \brief Metoda generuje liczbę pseudolosową 
 	 *
 	 *\retval Liczba pseudolosowa
 	 */
